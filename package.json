@@ -1,0 +1,29 @@
+{
+    "name": "tickets",
+    "version": "1.0.0",
+    "description": "This document describes the teamwork assignment for Telerik Academy students in \"JavaScript Applications\" course",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "http-server -a localhost -p 92 ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NDoroteya93/Redcurrant.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/NDoroteya93/Redcurrant/issues"
+    },
+    "homepage": "https://github.com/NDoroteya93/Redcurrant#readme",
+    "dependencies": {
+        "bootstrap": "^3.3.7",
+        "handlebars": "^4.0.6",
+        "jquery": "^3.2.1",
+        "jquery-ui": "^1.12.1",
+        "navigo": "^4.7.0",
+        "systemjs": "^0.20.12",
+        "systemjs-plugin-babel": "0.0.21"
+    }
+}
