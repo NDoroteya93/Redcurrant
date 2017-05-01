@@ -38,6 +38,7 @@ class Router {
 
     // getting the url 
     getFragment() {
+        debugger;
         let fragment = '';
         if (this.mode === 'history') {
             fragment = this.clearSlashes(decodeURI(location.pathname + location.search));
