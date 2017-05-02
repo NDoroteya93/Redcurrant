@@ -24,8 +24,10 @@
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "jqueryui": "^1.11.1",
+    "js-sha1": "^0.4.1",
     "navigo": "^4.7.0",
     "systemjs": "^0.20.12",
-    "systemjs-plugin-babel": "0.0.21"
+    "systemjs-plugin-babel": "0.0.21",
+    "toastr": "^2.1.2"
   }
 }

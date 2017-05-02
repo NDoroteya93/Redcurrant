@@ -1,0 +1,119 @@
+
+        <div id="home-container" class="row-fluid">
+            <!--To Do-->
+            <div id="todo-container" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 nopadding">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="text-center">To Do</h4>
+                    </div>
+                    <div id="draggable-todo" class="panel-body dropConnect">
+
+                        {{#each todo}}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 drag-container" data-id={{id}} data-state={{taskState}}>
+                            <div class="thumbnail">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h4 class="text-left">{{title}}</h4>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="text-right">
+                                            <span class="glyphicon glyphicon-user icon-size-xs"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <p><strong>Description:</strong></p>
+                                    <p><strong>Author: </strong>{{author}}</p>
+                                    <p><strong>Category: </strong>{{category}}</p>
+                                    <p>Comments</p>
+                                    <p align="center">
+                                        <a href="#myModal" class="btn btn-primary btn-block" data-toggle="modal">View More information</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                    <div class="panel-footer">
+
+                    </div>
+                </div>
+            </div>
+
+            <!--In progress-->
+            <div id="progress-container" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 nopadding">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="text-center">In Progress</h4>
+                    </div>
+                    <div id="draggable-progress" class="panel-body dropConnect">
+                        {{#each this}}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 drag-container" data-id={{id}} data-state={{taskState}}>
+                            <div class="thumbnail">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h4 class="text-left">{{progress.title}}</h4>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="text-right">
+                                            <span class="glyphicon glyphicon-user icon-size-xs"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <p><strong>Description:</strong></p>
+                                    <p><strong>Author: </strong>{{author}}</p>
+                                    <p><strong>Category: </strong>{{category}}</p>
+                                    <p>Comments</p>
+                                    <p align="center">
+                                        <a href="#myModal" class="btn btn-primary btn-block" data-toggle="modal">View More information</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="panel-footer">
+                    </div>
+                </div>
+            </div>
+
+            <!--Done-->
+            <div id="done-container" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 nopadding">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Done</h4>
+                    </div>
+                    <div id="draggable-done" class="panel-body dropConnect">
+                        {{#each done}}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 drag-container" data-id={{id}} data-state={{taskState}}>
+                            <div class="thumbnail">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h4 class="text-left">{{title}}</h4>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="text-right">
+                                            <span class="glyphicon glyphicon-user icon-size-xs"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="caption">
+                                    <p><strong>Description:</strong></p>
+                                    <p><strong>Author: </strong>{{author}}</p>
+                                    <p><strong>Category: </strong>{{category}}</p>
+                                    <p>Comments</p>
+                                    <p align="center">
+                                        <a href="#myModal" class="btn btn-primary btn-block" data-toggle="modal">View More information</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="panel-footer">
+                    </div>
+                </div>
+            </div>
+        </div>

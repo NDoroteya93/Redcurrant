@@ -6,8 +6,15 @@ SystemJS.config({
 
         // scripts
         'main': 'main.js',
-        'router': 'router.js',
+        'router': 'helpers/router.js',
+        'templates': 'helpers/templates.js',
+        'requester': 'helpers/requester.js',
 
+        // Controllers
+        'homeController': 'Controllers/home-controller.js',
+
+        // Models
+        'homeModel': 'Models/home-model.js',
         // libs
         'jquery': 'node_modules/jquery/dist/jquery.min.js',
         'jquery-ui': 'node_modules/jquery-ui/..',
