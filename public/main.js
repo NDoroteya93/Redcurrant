@@ -1,13 +1,12 @@
+'use strict';
 import { Router } from 'router';
-import { HomeController } from 'homeController';
+import { TicketsController } from 'ticketsController';
 
 // create
-const home = new HomeController;
+const tickets = new TicketsController;
 
 let router = new Navigo('#/home', true);
 
 router
-    .on({
-        '*': home.loadTemplate()
-    })
+    .on(tickets.loadTemplate())
     .resolve();

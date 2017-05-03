@@ -3,7 +3,7 @@
 function request(url, type, body, headers) {
     const promise = new Promise((resolve, reject) => $.ajax({
         url: url,
-        type: type,
+        method: type,
         contentType: 'application/json',
         headers: headers,
         data: JSON.stringify(body),

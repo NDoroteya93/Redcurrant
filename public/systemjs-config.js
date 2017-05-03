@@ -1,3 +1,5 @@
+'use strict';
+
 SystemJS.config({
     'transpiler': 'plugin-babel',
     'map': {
@@ -10,11 +12,12 @@ SystemJS.config({
         'templates': 'helpers/templates.js',
         'requester': 'helpers/requester.js',
 
-        // Controllers
-        'homeController': 'Controllers/home-controller.js',
-
         // Models
-        'homeModel': 'Models/home-model.js',
+        'ticketsModel': 'Models/tickets-model.js',
+
+        // Controllers
+        'ticketsController': 'Controllers/tickets-controller.js',
+
         // libs
         'jquery': 'node_modules/jquery/dist/jquery.min.js',
         'jquery-ui': 'node_modules/jquery-ui/..',

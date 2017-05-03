@@ -1,12 +1,12 @@
 'use strict';
 
 import { loadTemplate } from 'templates';
-import { HomeModel } from 'homeModel';
+import { TicketsModel } from 'ticketsModel';
 
-class HomeController {
+class TicketsController {
     constructor() {
-        this._container = $('#container'),
-            this._homeModel = new HomeModel;
+        this._container = $('#container');
+        this._homeModel = new TicketsModel;
     }
 
     get container() {
@@ -20,8 +20,9 @@ class HomeController {
     loadTemplate() {
         let self = this;
         let tickets = this.homeModel.getTickets();
-        console.log(tickets)
-        let lodaTemplate = new loadTemplate('home');
+
+        console.log(tickets.progress);
+        let lodaTemplate = new loadTemplate('tickets');
         lodaTemplate.getTemplate()
             .then(template => {
                 this.container.html(template(tickets));
@@ -52,4 +53,4 @@ class HomeController {
     }
 }
 
-export { HomeController };
+export { TicketsController };
