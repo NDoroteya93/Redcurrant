@@ -14,6 +14,7 @@ class loadTemplate {
     }
 
     getTemplate() {
+        debugger;
         if (this.cache.hasOwnProperty(this.templateName)) {
             return Promise.resolve(this.cache);
         }

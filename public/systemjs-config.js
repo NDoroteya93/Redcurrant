@@ -13,10 +13,14 @@ SystemJS.config({
         'requester': 'helpers/requester.js',
 
         // Models
+        'homeModel': 'Models/home-models.js',
         'ticketsModel': 'Models/tickets-model.js',
+        'userModel': 'Models/user-model.js',
 
         // Controllers
+        'homeController': 'Controllers/home-controller.js',
         'ticketsController': 'Controllers/tickets-controller.js',
+        'userController': 'Controllers/user-controller.js',
 
         // libs
         'jquery': 'node_modules/jquery/dist/jquery.min.js',
