@@ -18,11 +18,11 @@ function get(url, headers = {}) {
     return request(url, 'GET', '', headers);
 }
 
-function post(url, body, headers = { "Access-Control-Allow-Headers": "*" }) {
+function post(url, body = {}, headers = { "Access-Control-Allow-Headers": "*" }) {
     return request(url, 'POST', body, headers);
 }
 
-function put(url, body, headers = { "Access-Control-Allow-Headers": "*" }) {
+function put(url, body = {}, headers = { "Access-Control-Allow-Headers": "*" }) {
     return request(url, 'PUT', body, headers);
 }
 

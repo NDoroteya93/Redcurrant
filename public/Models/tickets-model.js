@@ -20,7 +20,6 @@ class TicketsModel {
         requester.get('https://130.204.27.87:44313/api/GetTickets')
             .then((res) => {
                 res.forEach((ticket) => {
-                    debugger;
                     if (ticket.taskState === 0) {
                         states.todo.push(ticket);
                     }
@@ -35,6 +34,13 @@ class TicketsModel {
                 });
             });
         return states;
+    }
+
+    changeState(id, state, body) {
+        return requester.post(`https://130.204.27.87:44313/api/ChangeState?Id=${id}&TaskState=${state}`, body)
+            .then(function(resp) {
+                return resp;
+            });
     }
 }
 
