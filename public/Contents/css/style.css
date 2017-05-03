@@ -254,43 +254,43 @@
         .nav-pills>li[data-slide-to="3"].active a {
             background-color: #8e44ad;
         }
-        /*Home Page*/
+        /*Tickets Page*/
         
-        #home-container .panel {
+        #tickets-container .panel {
             background: whitesmoke;
             border-color: transparent;
         }
         
-        #home-container .panel-heading {
+        #tickets-container .panel-heading {
             padding: 3px 15px;
         }
         
-        #home-container .panel-body {
+        #tickets-container .panel-body {
             padding: 5px 0;
         }
         
-        #home-container .panel-body>div.col-lg-12.col-md-12.col-sm-12.col-xs-12 {
+        #tickets-container .panel-body>div.col-lg-12.col-md-12.col-sm-12.col-xs-12 {
             border-left: 1px solid #ddd;
             border-right: 1px solid #ddd;
         }
         
-        #home-container #todo-container .thumbnail {
+        #tickets-container #todo-container .thumbnail {
             border-left: 5px solid #ec971f;
         }
         
-        #home-container #progress-container .thumbnail {
+        #tickets-container #progress-container .thumbnail {
             border-left: 5px solid red;
         }
         
-        #home-container #done-container .thumbnail {
+        #tickets-container #done-container .thumbnail {
             border-left: 5px solid #4cae4c;
         }
         
-        #home-container .thumbnail .caption {
+        #tickets-container .thumbnail .caption {
             border-top: 1px solid #ddd;
         }
         
-        #home-container .thumbnail .text-right span.icon-size-xs {
+        #tickets-container .thumbnail .text-right span.icon-size-xs {
             font-size: 26px;
             background: #dddddd;
             padding: 5px;
@@ -298,20 +298,20 @@
             color: #4b4a4a;
         }
         
-        #home-container .nopadding {
+        #tickets-container .nopadding {
             padding-left: 0;
             padding-right: 0;
         }
         
-        #home-container #todo-container .panel-heading {
+        #tickets-container #todo-container .panel-heading {
             border-top-right-radius: 0;
         }
         
-        #home-container #progress-container .panel-heading {
+        #tickets-container #progress-container .panel-heading {
             border-top-right-radius: 0;
             border-top-left-radius: 0;
         }
         
-        #home-container #done-container .panel-heading {
+        #tickets-container #done-container .panel-heading {
             border-top-left-radius: 0;
         }
