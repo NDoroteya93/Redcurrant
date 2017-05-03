@@ -67,7 +67,7 @@ class UserController {
             self.userModel.register(email, username, firstName, lastName, password, confirmPass)
                 .then((resp) => {
                         toastr.success(`User ${username} registered successfully`);
-                        location.href = '#/tickets'
+                        // location.href = '#/tickets's
                     },
                     errorMsg => toastr.error(errorMsg));
         });
