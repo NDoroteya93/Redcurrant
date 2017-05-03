@@ -5,8 +5,11 @@ import { TicketsController } from 'ticketsController';
 import { UserController } from 'userController';
 
 // create
-const tickets = new TicketsController;
-const home = new HomeController;
+const tickets = new TicketsController,
+    home = new HomeController,
+    users = new UserController;
+
+home.initHome();
 
 let router = new Navigo('#/home', true);
 
@@ -15,13 +18,17 @@ router
     .resolve();
 
 
+
 router
     .on({
         '*': function() {
-            home.initHome();
+            home.loadTemplate();
         },
         '#/tickets': function() {
             tickets.loadTemplate()
+        },
+        '#/register': function() {
+            users.register();
         }
     })
     .resolve();

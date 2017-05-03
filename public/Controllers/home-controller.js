@@ -18,20 +18,16 @@ class HomeController {
     }
 
     loadTemplate() {
-        const loadTemplate = new loadTemplate('home');
+        const getTemplate = new loadTemplate('home');
         let self = this;
-        loadTemplate.getTemplate()
+        getTemplate.getTemplate()
             .then(template => {
                 self.container.html(template());
             });
     }
 
     initHome() {
-        debugger;
         let self = this;
-        // load template
-        // this.loadTemplate();
-
 
         let settings = {
             authority: 'https://130.204.27.87:44314/',
