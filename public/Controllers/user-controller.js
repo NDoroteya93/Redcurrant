@@ -21,6 +21,16 @@ class UserController {
         return this._container;
     }
 
+    loadTemplate(templateName) {
+        // load template
+        const getTemplate = new loadTemplate(templateName);
+        let self = this;
+        getTemplate.getTemplate()
+            .then(template => {
+                self.container.html(template());
+            });
+    }
+
     login(manager) {
 
         manager
@@ -44,33 +54,24 @@ class UserController {
     }
 
     register() {
-        // load template
-        const getTemplate = new loadTemplate('user-register');
         let self = this;
-        getTemplate.getTemplate()
-            .then(template => {
-                self.container.html(template());
-            });
-
         // get data from input fields
-        debugger;
+        const email = $('#emailaddr').val(),
+            username = $("#reg-username").val(),
+            firstName = $('#fname-user').val(),
+            lastName = $('#lname-user').val(),
+            password = $('#reg-password').val(),
+            confirmPass = $('#confirmpass').val();
 
-        $("#submitbtn").on('click', function() {
-            debugger;
-            const email = $('#emailaddr').val(),
-                username = $("#reg-username").val(),
-                firstName = $('#fname-user').val(),
-                lastName = $('#lname-user').val(),
-                password = $('#reg-password').val(),
-                confirmPass = $('#confirmpass').val();
-
-            self.userModel.register(email, username, firstName, lastName, password, confirmPass)
-                .then((resp) => {
-                        toastr.success(`User ${username} registered successfully`);
-                        // location.href = '#/tickets's
-                    },
-                    errorMsg => toastr.error(errorMsg));
-        });
+        self.userModel.register(email, username, firstName, lastName, password, confirmPass)
+            .then((resp) => {
+                    toastr.success(`User ${username} registered successfully`);
+                    location.href = '#/tickets';
+                },
+                (errorMsg) => {
+                    console.log(errorMsg);
+                    location.href = '#/register';
+                });
     }
 }
 

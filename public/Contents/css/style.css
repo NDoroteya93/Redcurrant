@@ -3,6 +3,10 @@
         .hidden {
             display: none;
         }
+        
+        .toast {
+            margin-top: 100px;
+        }
         /*NAVBAR*/
         
         .navbar-brand {
