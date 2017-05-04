@@ -28,6 +28,9 @@ router
             tickets.loadTemplate()
         },
         '#/register': function() {
+            users.loadTemplate('user-register');
+        },
+        '#/register/submit': function() {
             users.register();
         }
     })

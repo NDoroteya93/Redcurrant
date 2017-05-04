@@ -8,7 +8,30 @@ function request(url, type, body, headers) {
         headers: headers,
         data: JSON.stringify(body),
         success: resolve,
-        error: reject
+        error: function(reject) {
+
+            let response = null;
+            let errors = [];
+            let errorsString = "";
+            if (reject.status == 400) {
+                try {
+                    response = JSON.parse(reject.responseText);
+                } catch (e) {}
+            }
+            if (response != null) {
+                let modelState = response.modelState;
+                for (const key in modelState) {
+                    if (modelState.hasOwnProperty(key)) {
+                        errorsString = (errorsString == "" ? "" : errorsString + "<br/>") + modelState[key];
+                        errors.push(modelState[key]); //list of error messages in an array
+                    }
+                }
+            }
+            //DISPLAY THE LIST OF ERROR MESSAGES 
+            if (errorsString != "") {
+                toastr.error(errorsString);
+            }
+        }
     }));
 
     return promise;
