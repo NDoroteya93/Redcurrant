@@ -32,6 +32,11 @@ router
         },
         '#/register/submit': function() {
             users.register();
+        },
+        '#/learn': function() {
+            $('body').animate({
+                scrollTop: document.body.scrollHeight
+            }, 500);
         }
     })
     .resolve();
