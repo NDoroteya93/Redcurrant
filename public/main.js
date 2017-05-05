@@ -21,22 +21,39 @@ router
 
 router
     .on({
+        // home 
         '*': function() {
             home.loadTemplate();
-        },
-        '#/tickets': function() {
-            tickets.loadTemplate()
-        },
-        '#/register': function() {
-            users.loadTemplate('user-register');
-        },
-        '#/register/submit': function() {
-            users.register();
         },
         '#/learn': function() {
             $('body').animate({
                 scrollTop: document.body.scrollHeight
             }, 500);
+        },
+
+        // tickets
+        '#/tickets': function() {
+            tickets.loadTemplate();
+            tickets.initEvents();
+        },
+        '#/tickets/edit': function(e) {
+
+        },
+        '#/tickets/comments': function() {
+            if ($('#container-comments').hasClass('hidden')) {
+                $('#container-comments').removeClass('hidden');
+            } else {
+                $('#container-comments').addClass('hidden');
+            }
+        },
+
+        /// register
+        '#/register': function() {
+            users.loadTemplate('user-register');
+        },
+        '#/register/submit': function() {
+            users.register();
         }
+
     })
     .resolve();

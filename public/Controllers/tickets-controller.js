@@ -31,8 +31,21 @@ class TicketsController {
                 setTimeout(function() {
                     self.container.html(template(tickets));
                     self.draggable();
+                    self.initEvents();
                 }, 500)
             });
+    }
+
+    initEvents() {
+
+        let self = this;
+        // edit button 
+        $('.edit-ticket').on('click', function() {
+            let $this = $(this),
+                $parent = $this.parents('.drag-container'),
+                $id = $parent.data('id');
+            self.loadDetailsTemplate($id);
+        });
     }
 
     draggable() {
@@ -78,7 +91,6 @@ class TicketsController {
             connectWith: ".dropConnect",
             items: "div.drag-container",
             update: function(event, ui) {
-                debugger;
                 const element = ui.item[0],
                     $id = $(element).data('id'),
                     $state = $(element).data('state'),
@@ -138,6 +150,26 @@ class TicketsController {
             taskState: state
         }
         this.ticketsModel.changeState(id, state, body);
+    }
+
+    // get tickets details
+    loadDetailsTemplate(id) {
+        let self = this,
+            details;
+
+        let template = new loadTemplate('tickets-details');
+        template.getTemplate()
+            .then((res) => {
+                debugger;
+                details = this.ticketsModel.getTicketsDetails(id);
+                console.log(details);
+                return res;
+            })
+            .then(res => {
+                setTimeout(function() {
+                    self.container.html(res(details));
+                }, 1000)
+            });
     }
 }
 

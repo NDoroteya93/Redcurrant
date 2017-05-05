@@ -1,4 +1,5 @@
 <div id="tickets-container" class="row-fluid">
+    <div class="container">
     <!--To Do-->
     <div id="todo-container" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 nopadding" data-state="0">
         <div class="panel panel-primary">
@@ -23,9 +24,9 @@
                         <div class="caption">
                             <p><strong>Description:</strong>{{description}}</p>
                              <p class="text-right task-footer">
-                                <i class="fa fa-info-circle fa-lg"></i>
-                                <i class="fa fa-pencil fa-lg"></i>
-                                <i class="fa fa-comments fa-lg fa-border icon-grey"></i>
+                                <a href="#/tickets/info"><i class="fa fa-info-circle fa-lg"></i></a>
+                                <a class="edit-ticket"><i class="fa fa-pencil fa-lg"></i></a>
+                                <a href="#/tickets/comments"><i class="fa fa-comments fa-lg fa-border icon-grey"></i></a>
                                 <span class="badge">{{commentsCount}}</span>
                             </p>
                         </div>
@@ -63,9 +64,9 @@
                         <div class="caption">
                             <p><strong>Description:</strong>{{description}}</p>
                             <p class="text-right task-footer">
-                                <i class="fa fa-info-circle fa-lg"></i>
-                                <i class="fa fa-pencil fa-lg"></i>
-                                <i class="fa fa-comments fa-lg fa-border icon-grey"></i>
+                                <a href="#/tickets/info"><i class="fa fa-info-circle fa-lg"></i></a>
+                                <a class="edit-ticket"><i class="fa fa-pencil fa-lg"></i></a>
+                                <a href="#/tickets/comments"><i class="fa fa-comments fa-lg fa-border icon-grey"></i></a>
                                 <span class="badge">{{commentsCount}}</span>
                             </p>
                         </div>
@@ -101,9 +102,9 @@
                         <div class="caption">
                             <p><strong>Description:</strong>{{description}}</p>
                             <p class="text-right task-footer">
-                                <i class="fa fa-info-circle fa-lg"></i>
-                                <i class="fa fa-pencil fa-lg"></i>
-                                <i class="fa fa-comments fa-lg fa-border icon-grey"></i>
+                                <a href="#/tickets/info"><i class="fa fa-info-circle fa-lg"></i></a>
+                                <a class="edit-ticket"><i class="fa fa-pencil fa-lg"></i></a>
+                                <a href="#/tickets/comments"><i class="fa fa-comments fa-lg fa-border icon-grey"></i></a>
                                 <span class="badge">{{commentsCount}}</span>
                             </p>
                         </div>
@@ -114,5 +115,6 @@
             <div class="panel-footer">
             </div>
         </div>
+    </div>
     </div>
 </div>

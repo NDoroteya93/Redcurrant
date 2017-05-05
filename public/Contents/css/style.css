@@ -271,6 +271,10 @@
             }
             /*Tickets Page*/
             
+            #tickets-container {
+                margin-top: 40px;
+            }
+            
             #tickets-container .panel {
                 background: whitesmoke;
                 border-color: transparent;
@@ -292,6 +296,14 @@
             #tickets-container .task-footer {
                 margin: 0;
                 position: relative;
+            }
+            
+            #tickets-container .task-footer a {
+                color: #333;
+            }
+            
+            #tickets-container .task-footer a:hover {
+                color: #4a47c5;
             }
             
             #tickets-container .task-footer .badge {

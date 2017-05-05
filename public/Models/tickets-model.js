@@ -36,11 +36,58 @@ class TicketsModel {
         return states;
     }
 
+    // state state - todo, in progress, done
     changeState(id, state, body) {
         return requester.post(`https://130.204.27.87:44313/api/ChangeState?Id=${id}&TaskState=${state}`, body)
             .then(function(resp) {
                 return resp;
             });
+    }
+
+    // get tickets details
+    getTicketsDetails(id) {
+        debugger;
+        const self = this;
+        let details = {};
+        requester.get(`https://130.204.27.87:44313/api/GetTicketDetails?id=${id}`)
+            .then((res) => {
+                // get difference between current and created date
+                let date2 = new Date();
+                let date1 = new Date(res.createDate);
+                let diff = new Date(date2.getTime() - date1.getTime());
+                // diff is: Thu Jul 05 1973 04:00:00 GMT+0300 (EEST)
+
+                // date 
+                if ((diff.getUTCFullYear() - 1970) > 0) {
+                    details.diffDate = (diff.getUTCFullYear() - 1970) + ' years';
+                } else if (diff.getUTCMonth() > 0) {
+                    details.diffDate = diff.getUTCMonth() + ' months'
+                } else {
+                    details.diffDate = diff.getUTCDate() - 1 + ' days'
+                }
+
+                // state 
+                if (res.taskState === 0) {
+                    details.state = 'ToDo';
+                } else if (res.taskState === 1) {
+                    details.state = 'In Progress';
+                } else {
+                    details.state = 'Done';
+                }
+
+                // assigne
+                if (res.assignee === '') {
+                    details.assignee = 'Unassigned';
+                } else {
+                    details.assignee = res.assignee;
+                }
+
+                console.log(res);
+                details.details = res;
+                details.comments = res.comments.length;
+            });
+
+        return details;
     }
 }
 
