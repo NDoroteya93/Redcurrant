@@ -46,7 +46,6 @@ class TicketsModel {
 
     // get tickets details
     getTicketsDetails(id) {
-        debugger;
         const self = this;
         let details = {};
         requester.get(`https://130.204.27.87:44313/api/GetTicketDetails?id=${id}`)
@@ -91,7 +90,21 @@ class TicketsModel {
     }
 
     // add tickets 
-    addTicket() {}
+    addTicket(title, description, priority, parrent) {
+        debugger;
+        const body = {
+            categoryId: 0,
+            title: title,
+            priority: Number(priority),
+            screenshotUrl: "",
+            description: description,
+            parentTicket_Id: parrent || 0
+        }
+
+        let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+        let header = { "Authorization": "Bearer " + token }
+        return requester.post('https://130.204.27.87:44313/api/CreateTicket', body, header);
+    }
 
 }
 

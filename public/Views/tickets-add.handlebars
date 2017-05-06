@@ -1,40 +1,32 @@
-<div id="add-ticket-template">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Add Ticket</div>
-                <div class="panel-body">
-                    <form role="form" method="post" action="" accept-charset="UTF-8">
-                        <label for="reg-username">Username</label>
-                        <input type="text" id="reg-username" class="form-control" name="fname" placeholder="Example: John">
-
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname-user" class="form-control" name="fname" placeholder="Example: John">
-
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname-user" class="form-control" name="lname" placeholder="Example: Smith">
-
-                        <label for="gender" class="m-t-10">Your Gender</label>
-                        <select id="gender" class="form-control" name="gender">
-                            <option value="unknown">Unknown</option>
-                            <option value="alabama">Female</option>
-                            <option value="alaska">Male</option>
+  <div class="modal fade" id="editТicket" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="headers">Add Ticket</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="ticket-title">Title</label>
+                        <input id="ticket-title" class="form-control " type="text" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="select-priority">Priority</label>
+                        <select class="form-control" id="select-priority">
+                            <option data-priority="0">Low</option>
+                            <option data-priority="1">Medium</option>
+                            <option data-priority="2">High</option>
                         </select>
+                    </div>
 
-                        <label for="emailaddr" class="m-t-10">Email Address</label>
-                        <input type="text" id="emailaddr" class="form-control" name="email" placeholder="Example: john.smith@gmail.com">
-
-                        <label for="reg-password" class="m-t-10">Password</label>
-                        <input type="password" id="reg-password" class="form-control" name="password" placeholder="">
-
-                        <label for="confirmpass" class="m-t-10">Verify Password</label>
-                        <input type="password" id="confirmpass" class="form-control" name="verifypass" placeholder="">
-
-                        <center><a href="#/register/submit" type="button" class="btn btn-primary m-t-10" id="submitbtn" name="submit">Submit</a></center>
-
-                    </form>
+                     <div class="form-group">
+                        <label for="ticket-title">Description</label>
+                        <input id="ticket-description" class="form-control" type="text" placeholder="Description">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button id="addTicketBtn"type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Add</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
