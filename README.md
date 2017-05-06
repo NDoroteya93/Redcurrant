@@ -36,6 +36,7 @@ Please define and implement the following assets in your project:
   - At least 7 types (classes) of objects
 - Unit tests
   - Using [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [SinonJS](http://sinonjs.org/)
+  - Install with npm
 - Implement a UI for your application
   - Use KendoUI, jQueryUI or implement your own UI logic
 - Use some kind of web data storage, one of the following is Ok
