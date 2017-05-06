@@ -3,6 +3,9 @@ import { loadTemplate } from 'templates';
 import { HomeModel } from 'homeModel';
 import { UserController } from 'userController';
 
+const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
+    LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
+
 class HomeController {
     constructor() {
         this._container = $('#container');
@@ -49,8 +52,11 @@ class HomeController {
         let user;
         Oidc.Log.logger = console;
         manager.events.addUserLoaded(function(loadedUser) {
+            debugger;
             user = loadedUser;
-            localStorage.setItem('testObject', JSON.stringify(loadedUser));
+            let data = JSON.stringify(loadedUser);
+            localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, data);
+            localStorage.setItem(LOCAL_STORAGE_AUTHKEY_KEY, user.access_token);
             $(".signed-user").removeClass('hidden');
             $(".unsigned-user").addClass('hidden');
             self.display('.js-user', user);
@@ -66,17 +72,18 @@ class HomeController {
 
         // login
         $('#login-btn').on('click', function() {
-            debugger;
             self.userController.login(manager);
         });
 
         $('#token').on('click', function() {
-            var retrievedObject = JSON.parse(localStorage.getItem('testObject'));
+            var retrievedObject = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY));
             retrievedObject.access_token;
         });
 
         // logout
-        $('#logoutBtn').on('click', function() {
+        $('#logout-btn').on('click', function() {
+            localStorage.removeItem(LOCAL_STORAGE_USERNAME_KEY);
+            localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
             self.userController.logout(manager);
         });
 

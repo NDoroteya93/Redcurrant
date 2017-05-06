@@ -4,6 +4,9 @@ import { loadTemplate } from 'templates';
 import { TicketsModel } from 'ticketsModel';
 import { Helpers } from 'helpers';
 
+const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
+    LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
+
 class TicketsController {
     constructor() {
         this._container = $('#container');
@@ -55,6 +58,15 @@ class TicketsController {
 
         // dragable tickets
         this.draggable();
+
+        // add ticket event
+        $('#addTicketBtn').on('click', function() {
+            let $title = $('#ticket-title').val(),
+                $description = $('#ticket-description').val(),
+                $priority = $("#select-priority option:selected").data('priority');
+            self.ticketsModel.addTicket($title, $description, $priority);
+            $("#editТicket").modal('hide');
+        })
     }
 
     draggable() {
@@ -87,10 +99,6 @@ class TicketsController {
                     //code
                     position_updated = false;
                 }
-            },
-
-            receive: function(event, ui) {
-                // code
             }
         });
 
@@ -182,14 +190,22 @@ class TicketsController {
 
     // add ticket
     addTicket() {
-
+        debugger;
+        let addTemplate = new loadTemplate('tickets-add'),
+            self = this;
+        addTemplate.getTemplate()
+            .then((template) => {
+                $('<div id="popupAdd"></div>').appendTo(self.container);
+                $('#popupAdd').html(template());
+                $("#editТicket").modal('show');
+                self.initEvents();
+            });
     }
 
     allTickets() {
         debugger;
         let self = this,
-            tickets,
-            popupContent;
+            tickets;
 
         this.helpers.priorityHelper();
 
@@ -203,16 +219,6 @@ class TicketsController {
             .then(template => {
                 setTimeout(function() {
                     self.container.html(template(tickets));
-                }, 500);
-                popupContent = $("#load-popup");
-
-                // get popup templates
-            }).then(() => {
-                let template = new loadTemplate('popup');
-                return template.getTemplate();
-            }).then((template) => {
-                setTimeout(function() {
-                    popupContent.html(template());
                 }, 500);
             });
     }
