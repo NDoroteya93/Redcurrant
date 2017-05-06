@@ -2,11 +2,13 @@
 
 import { loadTemplate } from 'templates';
 import { TicketsModel } from 'ticketsModel';
+import { Helpers } from 'helpers';
 
 class TicketsController {
     constructor() {
         this._container = $('#container');
         this._ticketModel = new TicketsModel;
+        this._helpers = new Helpers;
     }
 
     get container() {
@@ -15,6 +17,10 @@ class TicketsController {
 
     get ticketsModel() {
         return this._ticketModel;
+    }
+
+    get helpers() {
+        return this._helpers;
     }
 
     loadTemplate() {
@@ -30,7 +36,6 @@ class TicketsController {
             .then(template => {
                 setTimeout(function() {
                     self.container.html(template(tickets));
-                    self.draggable();
                     self.initEvents();
                 }, 500)
             });
@@ -46,6 +51,10 @@ class TicketsController {
                 $id = $parent.data('id');
             self.loadDetailsTemplate($id);
         });
+
+
+        // dragable tickets
+        this.draggable();
     }
 
     draggable() {
@@ -160,7 +169,6 @@ class TicketsController {
         let template = new loadTemplate('tickets-details');
         template.getTemplate()
             .then((res) => {
-                debugger;
                 details = this.ticketsModel.getTicketsDetails(id);
                 console.log(details);
                 return res;
@@ -169,6 +177,43 @@ class TicketsController {
                 setTimeout(function() {
                     self.container.html(res(details));
                 }, 1000)
+            });
+    }
+
+    // add ticket
+    addTicket() {
+
+    }
+
+    allTickets() {
+        debugger;
+        let self = this,
+            tickets,
+            popupContent;
+
+        this.helpers.priorityHelper();
+
+        let lodaTemplate = new loadTemplate('tickets-all');
+        lodaTemplate.getTemplate()
+            .then((template) => {
+                tickets = this.ticketsModel.getTickets();
+                console.log(tickets);
+                return template;
+            })
+            .then(template => {
+                setTimeout(function() {
+                    self.container.html(template(tickets));
+                }, 500);
+                popupContent = $("#load-popup");
+
+                // get popup templates
+            }).then(() => {
+                let template = new loadTemplate('popup');
+                return template.getTemplate();
+            }).then((template) => {
+                setTimeout(function() {
+                    popupContent.html(template());
+                }, 500);
             });
     }
 }

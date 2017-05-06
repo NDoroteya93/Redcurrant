@@ -32,25 +32,22 @@ class UserController {
     }
 
     login(manager) {
-
-        manager
-            .signinPopup()
-            .catch(function(error) {
-                console.error('error while logging in through the popup', error);
-            });
         $(".signed-user").removeClass('hidden');
-        location.href = '#/home';
+        $(".unsigned-user").addClass('hidden');
+        manager
+            .signinPopup();
 
     }
 
     logout(manager) {
+        $(".signed-user").addClass('hidden');
+        $(".unsigned-user").removeClass('hidden');
         manager
             .signoutRedirect()
             .catch(function(error) {
                 console.error('error while signing out user', error);
             });
-        $(".signed-user").addClass('hidden');
-        location.href = '#/home';
+
     }
 
     register() {

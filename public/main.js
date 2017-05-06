@@ -46,6 +46,9 @@ router
                 $('#container-comments').addClass('hidden');
             }
         },
+        '#/tickets/all': function() {
+            tickets.allTickets();
+        },
 
         /// register
         '#/register': function() {

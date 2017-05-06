@@ -73,6 +73,7 @@ class TicketsModel {
                     details.state = 'In Progress';
                 } else {
                     details.state = 'Done';
+                    details.done = 'done';
                 }
 
                 // assigne
@@ -82,13 +83,16 @@ class TicketsModel {
                     details.assignee = res.assignee;
                 }
 
-                console.log(res);
                 details.details = res;
                 details.comments = res.comments.length;
             });
 
         return details;
     }
+
+    // add tickets 
+    addTicket() {}
+
 }
 
 export { TicketsModel }

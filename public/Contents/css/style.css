@@ -365,8 +365,24 @@
             }
             /*// register*/
             
+            #register-template {
+                background-image: url('../images/home-template.jpg');
+                background-position-y: -410px;
+                background-size: cover;
+                background-repeat: no-repeat
+            }
+            
             #register-template .m-t-10 {
                 margin-top: 10px;
+            }
+            
+            #register-template .col-md-4 {
+                margin-top: 10px;
+            }
+            
+            #register-template .col-md-4 .panel-primary {
+                -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+                box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
             }
             /*HOME*/
             
@@ -421,4 +437,61 @@
                 margin: 0 auto;
                 line-height: 24px;
                 color: grey;
+            }
+            /*all tickets template*/
+            
+            #all-tickets-template .btn-group .btn {
+                transition: background-color .3s ease;
+            }
+            
+            #all-tickets-template .panel-table .panel-body {
+                padding: 0;
+            }
+            
+            #all-tickets-template .table>thead>tr>th {
+                border-bottom: none;
+            }
+            
+            #all-tickets-template .panel-footer,
+            #all-tickets-template .panel-table .panel-body .table-bordered {
+                border-style: none;
+                margin: 0;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>thead>tr>th:first-of-type {
+                text-align: center;
+                width: 50px;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>thead>tr>th.col-tools {
+                text-align: center;
+                width: 120px;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>thead>tr>th:last-of-type,
+            #all-tickets-template .panel-table .panel-body .table-bordered>tbody>tr>td:last-of-type {
+                border-right: 0;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>thead>tr>th:first-of-type,
+            #all-tickets-template .panel-table .panel-body .table-bordered>tbody>tr>td:first-of-type {
+                border-left: 0;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>tbody>tr:first-of-type>td {
+                border-bottom: 0;
+            }
+            
+            #all-tickets-template .panel-table .panel-body .table-bordered>thead>tr:first-of-type>th {
+                border-top: 0;
+            }
+            
+            #all-tickets-template .pagination>li>a,
+            #all-tickets-template .pagination>li>span {
+                border-radius: 50% !important;
+                margin: 0 5px;
+            }
+            
+            #all-tickets-template .pagination {
+                margin: 0;
             }

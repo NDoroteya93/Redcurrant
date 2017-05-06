@@ -11,6 +11,7 @@ SystemJS.config({
         'router': 'helpers/router.js',
         'templates': 'helpers/templates.js',
         'requester': 'helpers/requester.js',
+        'helpers': 'helpers/handlebar-helper.js',
 
         // Models
         'homeModel': 'Models/home-models.js',

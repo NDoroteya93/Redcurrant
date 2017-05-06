@@ -35,7 +35,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs" style="padding-left: 0px;">
                 <ul class="nav navbar-nav">
-                    <li><a href="#/tickets/add" class="signed-user hidden"><i class="fa fa-plus"></i> ADD TICKETS</a></li>
+                    <li><a href="#/tickets/add" class="signed-user hidden"><i class="fa fa-plus"></i> ADD TICKET</a></li>
+                    <li><a href="#/tickets/all" class="signed-user hidden"><i class="fa fa-list"></i> ALL TICKETS</a></li>
                     <li><a href="#/tickets"><i class="fa fa-tags"></i> TICKETS</a></li>
 
                     <!--<li class="dropdown mega-dropdown">
@@ -52,7 +53,7 @@
                     <li class="dropdown  signed-user hidden">
                         <a href="#" class="dropdown-toggler" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user"></span>
-                            <strong id="user-name">User</strong>
+                            <strong id="user-name" class="user-name">User</strong>
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </a>
                         <ul style="background-color:white;" class="dropdown-menu">
@@ -65,8 +66,8 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-8">
-                                            <p class="text-left"><strong>User Name</strong></p>
-                                            <p class="text-left small">User email</p>
+                                            <p class="text-left"><strong class="user-name">User Name</strong></p>
+                                            <p class="text-left small user-email">User email</p>
                                             <p class="text-left">
                                                 <a href="#" class="btn btn-primary btn-block btn-sm">View Profile</a>
                                             </p>
@@ -101,7 +102,7 @@
                                         </div>
                                         or
                                         <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                            <div class="form-group">
+                                            <!--<div class="form-group">
                                                 <label class="sr-only" for="user-email">Email address</label>
                                                 <input type="email" class="form-control" id="user-email" placeholder="Email address" required="">
                                             </div>
@@ -109,9 +110,10 @@
                                                 <label class="sr-only" for="user-password">Password</label>
                                                 <input type="password" class="form-control" id="user-password" placeholder="Password" required="">
                                                 <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
-                                                <button type="button" id="login-btn" class="btn btn-primary btn-block">Sign in</button>
+                                                <button type="button" id="login-btn" class="btn btn-primary btn-block">Sign In Now</button>
+                                                <button type="button" id="token" class="btn btn-primary btn-block">Token</button>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
