@@ -56,6 +56,11 @@ router
         },
         '#/register/submit': function() {
             users.register();
+        },
+
+        /// users
+        '#/users': function () {
+            users.allUsers();
         }
 
     })
