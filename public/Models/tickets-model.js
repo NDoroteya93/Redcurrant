@@ -91,7 +91,6 @@ class TicketsModel {
 
     // add tickets 
     addTicket(title, description, priority, categoryId, parrent) {
-        debugger;
         const body = {
             categoryId: categoryId,
             title: title,
@@ -104,6 +103,30 @@ class TicketsModel {
         let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
         let header = { "Authorization": "Bearer " + token }
         return requester.post('https://130.204.27.87:44313/api/CreateTicket', body, header);
+    }
+
+    assigneeUserToTask(taskId, userId) {
+        debugger;
+        const body = {
+            id: taskId,
+            userId: userId
+        }
+        return requester.post(`https://130.204.27.87:44313/api/AssigneeUserToTask?Id=${taskId}&UserId=${userId}`, body)
+            .then(function(resp) {
+                console.log(resp);
+                return resp;
+            });
+    }
+
+    deleteTicket(id) {
+        debugger;
+        const body = {
+            ticketId: id
+        }
+        return requester.post(`https://130.204.27.87:44313/api/DeleteTicket?ticketId=${id}`, body)
+            .then(function(resp) {
+                return resp;
+            });
     }
 
 }
