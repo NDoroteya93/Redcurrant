@@ -66,6 +66,9 @@ router
         /// users
         '#/users': function() {
             users.allUsers();
+        },
+        '#/user/:username': function() {
+            users.getUser();
         }
 
     })

@@ -1,5 +1,4 @@
 <div id="users-container" class="row-fluid">
-    {{!--<div style="padding-top:50px;"> </div>--}}
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -8,11 +7,9 @@
             <div>
                 {{#each user}}
                 <div class="users">
-                    <div class="col-lg-8">
-                        <a href="#">
-                            <p><strong><i class="fa fa-user-o"></i> {{userName}}</strong></p>
-                        </a>
-                    </div>
+                    <a href="#/user/{{userName}}">
+                        <p><strong><i class="fa fa-user-o"></i> {{userName}}</strong></p>
+                    </a>
                 </div>
                 {{/each}}
             </div>

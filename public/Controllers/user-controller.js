@@ -70,7 +70,7 @@ class UserController {
                     console.log(errorMsg);
                     location.href = '#/register';
                 });
-    }
+    };
 
     allUsers() {
         let self = this,
@@ -82,12 +82,38 @@ class UserController {
                 users = this.userModel.getUsers();
                 return res;
             })
-            .then(res => {
+            .then((res) => {
                 setTimeout(function() {
                     self.container.html(res(users));
                 }, 1000)
             });
-    }
+    };
+
+    getUser() {
+        let self = this,
+            variableNames = [],
+            uri = self._container[0].baseURI,
+            route = '/user/:username',
+            user;
+
+        route = route.replace(/([:*])(\w+)/g, function (full, dots, name) {
+            variableNames.push(name);
+            return '([^\/]+)';
+        }) + '(?:\/|$)';
+        let userName = uri.match(new RegExp(route))[1];
+
+        let template = new loadTemplate('user');
+        template.getTemplate()
+            .then((res) => {
+                user = this.userModel.getUser(userName);
+                return res;
+            })
+            .then((res) => {
+                setTimeout(function() {
+                    self.container.html(res(user));
+                }, 1000)
+            });
+    };
 }
 
 

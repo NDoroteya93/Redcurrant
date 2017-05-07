@@ -23,6 +23,19 @@ class UserModel {
         return users;
     }
 
+    getUser(userName) {
+        let self = this,
+            user = { data: [] };
+        requester.get(`https://130.204.27.87:44313/api/accounts/user/${userName}`)
+            .then((res) => {
+                if (res.joinDate) {
+                    res.joinDate = res.joinDate.slice(0, 10);
+                }
+                user.data = res;
+            });
+        return user;
+    }
+
     register(email, username, firstname, lastname, password, confirmPass, roleName) {
         debugger;
         const body = {

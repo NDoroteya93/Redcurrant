@@ -1,0 +1,27 @@
+<div id="users-container" class="row-fluid">
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="text-center">User</h4>
+            </div>
+            <div>
+                {{#data}}
+                <div class="user">
+                    <h4 class="capitalize"><strong>{{userName}}</strong></h4>
+                </div>
+                <div class="user">
+                    <p>Name: <strong>{{fullName}}</strong></p>
+                    <p>Email: {{email}}</p>
+                    <p>Level: {{level}}</p>
+                    <p>Join date: {{joinDate}}</p>
+                    <div>Roles:
+                    {{#each roles}}
+                        <span></span>
+                    {{/each}}
+                    </div>
+                </div>
+                {{/data}}
+            </div>
+        </div>
+    </div>
+</div>
