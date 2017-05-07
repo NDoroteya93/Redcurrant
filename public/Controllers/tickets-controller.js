@@ -125,6 +125,13 @@ class TicketsController {
             location.href = "#/tickets/all";
             $("#delete").modal('hide');
         });
+        // lation on close modal popup
+        jQuery(function($) {
+            $('#editТicket').on('hidden.bs.modal', function(e) {
+                location.href = "#/tickets";
+            });
+        });
+
     }
 
     draggable() {
@@ -228,11 +235,12 @@ class TicketsController {
     loadDetailsTemplate(id) {
         let self = this,
             details;
-
+        const allUsers = self.users.getUsers();
         let template = new loadTemplate('tickets-details');
         template.getTemplate()
             .then((res) => {
                 details = this.ticketsModel.getTicketsDetails(id);
+                details.users = allUsers;
                 console.log(details);
                 return res;
             })

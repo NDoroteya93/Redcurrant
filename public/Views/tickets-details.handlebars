@@ -1,5 +1,5 @@
-  <div id="tickets-details-container">
-  <div style="padding-top:50px;"> </div>
+<div id="tickets-details-container">
+    <div style="padding-top:50px;"> </div>
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
@@ -17,90 +17,103 @@
                             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Users
                                 <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">User 1</a></li>
-                                <li><a href="#"><i class="fa fa-fw fa-check" aria-hidden="true"></i> User 2</a></li>
-                                <li><a href="#">User 3</a></li>
-                                <li role="separator" class="divider"></li>
-                            </ul>
-                        </div>
-                    </span>
-                    <br><br>
-                    <i class="fa fa-tags" aria-hidden="true"></i> <a href="#/tags/priority" class="tag">#{{details.priority}}</a> <a href="#/tags/assigne" class="tag">#{{assignee}}</a> <a href="#/tags/state" class="tag">#{{state}}</a>
-                    <br><br><hr>
-                    <span class="pull-left">
+                    </button>
+                    <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {{#each users.user}}
+                        <li><a href="#/users"><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{fullName}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                </span>
+                <br><br>
+                <i class="fa fa-tags" aria-hidden="true"></i> <a href="#/tags/priority" class="tag">#{{details.priority}}</a>                <a href="#/tags/assigne" class="tag">#{{assignee}}</a> <a href="#/tags/state" class="tag">#{{state}}</a>
+                <br><br>
+                <hr>
+                <span class="pull-left">
                         Created <strong>{{diffDate}}</strong> ago by <strong>{{details.author}}</strong>
                     </span>
-                    <span class="pull-right">
+                <span class="pull-right">
                       <a href="#/tickets/comments" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-comments-o" aria-hidden="true"></i> Comments <span class="badge">{{comments}}</span></a>
-                    </span>
-                </div>
+                </span>
             </div>
         </div>
     </div>
+</div>
 
-    {{!--Comments--}}
-<div class="container hidden" id="container-comments">
-        <div class="panel panel-default">
-            {{#each details.comments}}
-                <div class="panel-body">
-                    <div class="pull-left">
-                        <a href="#">
+{{!--Comments--}}
+<div class="container">
+    <div class="panel panel-default hidden" id="container-comments">
+        {{#each details.comments}}
+        <div class="panel-body">
+            <div class="pull-left">
+                <a href="#">
                             <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
-                    </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>{{author}}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-                    <span>
+            </div>
+            <h4><a href="#" style="text-decoration:none;"><strong>{{author}}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small>
+            </h4>
+            <span>
                         <div class="navbar-right">
                             <div class="dropdown">
                                 <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <i class="fa fa-cog" aria-hidden="true"></i>
                                     <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                    <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </span>
-                    <hr>
-
-                    
-                    <div class="post-content">
-                        <p>{{content}}</p>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="pull-right btn-group-xs">
-                            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Like</a>
-                            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
-                            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
-                        </div>
-                        <div class="pull-left">
-                            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public</p>
-                        </div>
-                        <br>
-                    </div>
-                    <hr>
-                    <div class="media">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                {{/each}}
-            </div>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+            </ul>
         </div>
     </div>
+    </span>
+    <hr>
+
+
+    <div class="post-content">
+        <p>{{content}}</p>
+    </div>
+    <hr>
+    <div>
+        <div class="pull-right btn-group-xs">
+            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Like</a>
+            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
+        </div>
+        <div class="pull-left">
+            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public</p>
+        </div>
+        <br>
+    </div>
+    <hr>
+    <div class="media">
+        <div class="pull-left">
+            <a href="#">
+                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                            </a>
+        </div>
+        <div class="media-body">
+            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+        </div>
+    </div>
+</div>
+
+{{/each}}
+</div>
+<div class="panel-body">
+    <div class="media">
+        <div class="pull-left">
+            <a href="#">
+                        <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                    </a>
+        </div>
+        <div class="media-body">
+            <textarea id="createNewComment" class="form-control" rows="1" placeholder="Comment"></textarea>
+        </div>
+    </div>
+</div>
+</div>
+</div>
