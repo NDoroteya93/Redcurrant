@@ -63,8 +63,11 @@ router
         },
 
         /// users
-        '#/users': function () {
+        '#/users': function() {
             users.allUsers();
+        },
+        '#/user/:username': function() {
+            users.getUser();
         }
 
     })
