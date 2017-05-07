@@ -1,40 +1,45 @@
-  <div class="modal fade" id="editТicket" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="headers">Add Ticket</h4>
+<div class="modal fade" id="editТicket" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="headers">Add Ticket</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="ticket-title">Title</label>
+                    <input id="ticket-title" class="form-control " type="text" placeholder="Title">
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="ticket-title">Title</label>
-                        <input id="ticket-title" class="form-control " type="text" placeholder="Title">
-                    </div>
-                    <div class="form-group">
-                        <label for="select-priority">Priority</label>
-                        <select class="form-control" id="select-priority">
+                <div class="form-group">
+                    <label for="select-priority">Priority</label>
+                    <select class="form-control" id="select-priority">
                             <option data-priority="0">Low</option>
                             <option data-priority="1">Medium</option>
                             <option data-priority="2">High</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="select-category">Category</label>
-                        <select class="form-control" id="select-category">
-                            <option data-id="1">Category 1</option>
-                            <option data-id="2">Category 2</option>
-                        </select>
-                    </div>
-
-                     <div class="form-group">
-                        <label for="ticket-title">Description</label>
-                        <input id="ticket-description" class="form-control" type="text" placeholder="Description">
-                    </div>
                 </div>
-                <div class="modal-footer ">
-                    <button id="addTicketBtn"type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Add</button>
+
+                <div class="form-group">
+                    <label for="select-category">Category</label>
+                    <select class="form-control" id="select-category">
+                        {{#each this}}
+                            {{#if @first}}
+                            <option selected="selected" data-id={{id}}>{{name}}</option>  
+                            {{else}}
+                            <option data-id={{id}}>{{name}}</option>  
+                            {{/if}}
+                        {{/each}}
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="ticket-title">Description</label>
+                    <input id="ticket-description" class="form-control" type="text" placeholder="Description">
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button id="addTicketBtn" type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Add</button>
             </div>
         </div>
     </div>
+</div>

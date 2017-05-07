@@ -3,6 +3,7 @@
 import { loadTemplate } from 'templates';
 import { TicketsModel } from 'ticketsModel';
 import { UserModel } from 'userModel';
+import { CategoryModel } from 'categoryModel';
 import { Helpers } from 'helpers';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
@@ -13,6 +14,7 @@ class TicketsController {
         this._container = $('#container');
         this._ticketModel = new TicketsModel;
         this._users = new UserModel;
+        this._categories = new CategoryModel;
         this._helpers = new Helpers;
     }
 
@@ -30,6 +32,10 @@ class TicketsController {
 
     get users() {
         return this._users;
+    }
+
+    get categories() {
+        return this._categories;
     }
 
     loadTemplate() {
@@ -115,7 +121,6 @@ class TicketsController {
             debugger;
             let $this = $(this);
             let $id = $this.attr('data-id');
-            // $('.table tr[data-id="' + $id + '"]').remove();
             self.deteleTicket($id);
             location.href = "#/tickets/all";
             $("#delete").modal('hide');
@@ -241,11 +246,13 @@ class TicketsController {
     // add ticket
     addTicket() {
         let addTemplate = new loadTemplate('tickets-add'),
-            self = this;
+            self = this,
+            categories = this.categories.getCategories();
+        console.log(categories);
         addTemplate.getTemplate()
             .then((template) => {
                 $('<div id="popupAdd"></div>').appendTo(self.container);
-                $('#popupAdd').html(template());
+                $('#popupAdd').html(template(categories));
                 $("#editТicket").modal('show');
                 self.initEvents();
             });

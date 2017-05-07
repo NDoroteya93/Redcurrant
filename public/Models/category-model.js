@@ -11,14 +11,18 @@ class CategoryModel {
     }
 
     getCategories() {
-        let self = this,
-            categories;
+        debugger;
+        let categories = [];
         requester.get('https://130.204.27.87:44313/api/GetCategories')
             .then((res) => {
-                categories = res;
+                res.forEach((category) => {
+                    categories.push(category);
+                })
             });
-        return states;
+        return categories;
     }
+
+
 }
 
 export { CategoryModel };
