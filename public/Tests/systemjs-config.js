@@ -7,11 +7,13 @@ SystemJS.config({
         'systemjs-babel-build': '../../node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
 
         // scripts
-        'main': '../main.js',
+        'main': './tests-setup.js',
         'router': '../helpers/router.js',
         'templates': '../helpers/templates.js',
         'requester': '../helpers/requester.js',
         'helpers': '../helpers/handlebar-helper.js',
+
+
 
         // Models
         'homeModel': '../Models/home-models.js',
@@ -29,5 +31,6 @@ SystemJS.config({
         'navigo': '../../node_modules/navigo/lib/navigo.min.js'
     }
 });
+
 
 System.import('main');
