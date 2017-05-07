@@ -12,7 +12,7 @@
                                 <div class="pull-right">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-success btn-filter active" data-state="2">
-                                        <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                        <input type="radio" name="options" id="option1" autocomplete="off">
                                         Done
                                     </label>
                                         <label class="btn btn-danger btn-filter" data-state="1">
@@ -24,7 +24,7 @@
                                     </label>
 
                                         <label class="btn btn-default btn-filter" data-state="all">
-                                        <input type="radio" name="options" id="option4" autocomplete="off"> All
+                                        <input type="radio" name="options" id="option4" autocomplete="off" checked> All
                                     </label>
                                     </div>
                                 </div>
@@ -48,39 +48,56 @@
                                 {{#each done}}
                                 <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
-                                        <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-primary btn-xs edit-icon-btn" data-title="Edit" data-toggle="modal" data-placement="top" data-toggle="tooltip"
+                                            title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-xs delete-icon-btn" data-title="Delete" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                     <td class="hidden-xs">{{title}}</td>
                                     <td>{{category}}</td>
                                     <td>{{author}}</td>
                                     <td>{{#enum priority}}{{/enum}}</td>
-                                </tr>
-                                {{/each}}
 
-                                {{#each progress}}
+                                    {{#if assignee}}
+                                    <td>{{assignee}}</td>
+                                    {{else}}
+                                    <td>Unassigned</td>
+                                    {{/if}}
+                                </tr>
+                                {{/each}} {{#each progress}}
                                 <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
-                                        <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-primary btn-xs edit-icon-btn" data-title="Edit" data-toggle="modal" data-placement="top" data-toggle="tooltip"
+                                            title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-xs delete-icon-btn" data-title="Delete" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                     <td class="hidden-xs">{{title}}</td>
                                     <td>{{category}}</td>
                                     <td>{{author}}</td>
                                     <td>{{#enum priority}}{{/enum}}</td>
+                                    
+                                    {{#if assignee}}
+                                    <td>{{assignee}}</td>
+                                    {{else}}
+                                    <td>Unassigned</td>
+                                    {{/if}}
                                 </tr>
-                                {{/each}}
-
-                                {{#each todo}}
+                                {{/each}} {{#each todo}}
                                 <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
-                                        <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-primary btn-xs edit-icon-btn" data-title="Edit" data-toggle="modal" data-placement="top" data-toggle="tooltip"
+                                            title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-xs delete-icon-btn" data-title="Delete" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>
                                     </td>
                                     <td class="hidden-xs">{{title}}</td>
                                     <td>{{category}}</td>
                                     <td>{{author}}</td>
                                     <td>{{#enum priority}}{{/enum}}</td>
+                                    
+                                    {{#if assignee}}
+                                    <td>{{assignee}}</td>
+                                    {{else}}
+                                    <td>Unassigned</td>
+                                    {{/if}}
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -126,41 +143,42 @@
         </div>
     </div>
 
-    
+
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    <h4 class="modal-title custom_align" id="Heading">Edit Ticket</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="edit-state">State</label>
-                        <select class="form-control" id="edit-state">
-                            <option data-id="0">To Do</option>
-                            <option data-id="1">Progress</option>
-                            <option data-id="2">Done</option>
+                        <select class="form-control" id="user-edit-state">
+                            <option selected="selected" data-state="0">To Do</option>
+                            <option data-state="1">Progress</option>
+                            <option data-state="2">Done</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-
-                        <input class="form-control " type="text" placeholder="Irshad">
-                    </div>
-                    <div class="form-group">
-                        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-
-
+                         <label for="edit-assignee">Assignee</label>
+                        <select class="form-control" id="edit-assignee">
+                            {{#each users.user}}
+                            {{#if @first}}
+                            <option selected="selected" data-user={{id}}>{{fullName}}</option>  
+                            {{else}}
+                            <option data-user={{id}}>{{fullName}}</option>  
+                            {{/if}}
+                            {{/each}}                          
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    <button type="button" id="update-ticket-btn" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 
 
@@ -170,21 +188,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                    <h4 class="modal-title custom_align" id="Heading">Delete this Ticket</h4>
                 </div>
                 <div class="modal-body">
 
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Ticket?</div>
 
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                    <button id="delete-ticket-btn" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                 </div>
             </div>
 
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 </div>

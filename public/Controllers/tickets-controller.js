@@ -2,6 +2,7 @@
 
 import { loadTemplate } from 'templates';
 import { TicketsModel } from 'ticketsModel';
+import { UserModel } from 'userModel';
 import { Helpers } from 'helpers';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
@@ -11,6 +12,7 @@ class TicketsController {
     constructor() {
         this._container = $('#container');
         this._ticketModel = new TicketsModel;
+        this._users = new UserModel;
         this._helpers = new Helpers;
     }
 
@@ -24,6 +26,10 @@ class TicketsController {
 
     get helpers() {
         return this._helpers;
+    }
+
+    get users() {
+        return this._users;
     }
 
     loadTemplate() {
@@ -79,6 +85,40 @@ class TicketsController {
             } else {
                 $('.table tbody tr').css('display', 'none').fadeIn('slow');
             }
+        });
+
+        // edit btn to open edit dialog
+        $(".edit-icon-btn").on('click', function() {
+            let $this = $(this);
+            let $id = $this.parents('tr').data('id');
+            let $status = $this.parents('tr').data('status');
+            $("#update-ticket-btn").attr('data-id', $id);
+            $("#update-ticket-btn").attr('data-status', $status);
+            $("#edit").modal('show');
+        });
+
+        // edit ticket to update ticket
+        $("#update-ticket-btn").on('click', function() {
+            self.editTicket();
+        });
+
+        // delete btn to open idalog
+        $(".delete-icon-btn").on('click', function() {
+            let $this = $(this);
+            let $id = $this.parents('tr').data('id');
+            $("#delete-ticket-btn").attr("data-id", $id);
+            $("#delete").modal('show');
+        });
+
+        // edit ticket to update ticket
+        $("#delete-ticket-btn").on('click', function() {
+            debugger;
+            let $this = $(this);
+            let $id = $this.attr('data-id');
+            // $('.table tr[data-id="' + $id + '"]').remove();
+            self.deteleTicket($id);
+            location.href = "#/tickets/all";
+            $("#delete").modal('hide');
         });
     }
 
@@ -168,9 +208,6 @@ class TicketsController {
                     //code
                     position_updated = false;
                 }
-            },
-            receive: function(event, ui) {
-                // code
             }
         });
     }
@@ -203,7 +240,6 @@ class TicketsController {
 
     // add ticket
     addTicket() {
-        debugger;
         let addTemplate = new loadTemplate('tickets-add'),
             self = this;
         addTemplate.getTemplate()
@@ -221,13 +257,16 @@ class TicketsController {
         let self = this,
             tickets;
 
+        const allUsers = self.users.getUsers();
+
         this.helpers.priorityHelper();
 
         let lodaTemplate = new loadTemplate('tickets-all');
         lodaTemplate.getTemplate()
             .then((template) => {
                 tickets = this.ticketsModel.getTickets();
-                console.log(tickets)
+                tickets.users = allUsers;
+                console.log(tickets);
                 return template;
             })
             .then(template => {
@@ -240,8 +279,25 @@ class TicketsController {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
-    addComment() {
+    editTicket() {
+        let self = this;
+        let $id = $("#update-ticket-btn").attr('data-id'),
+            $currentState = $("#update-ticket-btn").attr('data-status'),
+            $updateState = $("#user-edit-state option:selected").attr('data-state'),
+            $getUser = $("#edit-assignee option:selected").attr('data-user');
+        if ($currentState !== $updateState) {
+            $('.table tr[data-status="' + $currentState + '"]').attr('data-status', $updateState);
+            self.updateState($id, $updateState);
+        }
 
+        $('.table tr[data-id="' + $id + '"]>td:last-child').text($("#edit-assignee option:selected").text());
+        self.ticketsModel.assigneeUserToTask($id, $getUser);
+        $("#edit").modal('hide');
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    deteleTicket(ticketId) {
+        this.ticketsModel.deleteTicket(ticketId);
     }
 }
 

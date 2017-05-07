@@ -50,7 +50,8 @@ router
             tickets.allTickets();
         },
         '#/tickets/add/:action': function(params) {
-            tickets.addTicket();
+            let id = params.id;
+            tickets.addTicket(id);
             console.log(params);
         },
 

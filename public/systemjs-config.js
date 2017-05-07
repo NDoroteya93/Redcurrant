@@ -17,11 +17,13 @@ SystemJS.config({
         'homeModel': 'Models/home-models.js',
         'ticketsModel': 'Models/tickets-model.js',
         'userModel': 'Models/user-model.js',
+        'categoryModel': 'Models/category-model.js',
 
         // Controllers
         'homeController': 'Controllers/home-controller.js',
         'ticketsController': 'Controllers/tickets-controller.js',
         'userController': 'Controllers/user-controller.js',
+        'categoryController': 'Controllers/category-controller.js',
 
         // libs
         'jquery': 'node_modules/jquery/dist/jquery.min.js',
