@@ -1,3 +1,4 @@
+
 'use strict';
 
 import { UserModel } from 'userModel';
@@ -69,6 +70,23 @@ class UserController {
                     console.log(errorMsg);
                     location.href = '#/register';
                 });
+    }
+
+    allUsers() {
+        let self = this,
+            users;
+
+        let template = new loadTemplate('users');
+        template.getTemplate()
+            .then((res) => {
+                users = this.userModel.getUsers();
+                return res;
+            })
+            .then(res => {
+                setTimeout(function() {
+                    self.container.html(res(users));
+                }, 1000)
+            });
     }
 }
 

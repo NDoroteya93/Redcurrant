@@ -11,6 +11,18 @@ class UserModel {
         return this._users;
     }
 
+    getUsers() {
+        let self = this,
+            users = { user: [] };
+        requester.get('https://130.204.27.87:44313/api/accounts/users')
+            .then((res) => {
+                res.forEach((obj) => {
+                    users.user.push(obj);
+                });
+        });
+        return users;
+    }
+
     register(email, username, firstname, lastname, password, confirmPass, roleName) {
         debugger;
         const body = {
