@@ -49,8 +49,9 @@ router
         '#/tickets/all': function() {
             tickets.allTickets();
         },
-        '#/tickets/add': function() {
+        '#/tickets/add/:action': function(params) {
             tickets.addTicket();
+            console.log(params);
         },
 
         /// register

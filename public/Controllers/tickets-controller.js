@@ -63,10 +63,23 @@ class TicketsController {
         $('#addTicketBtn').on('click', function() {
             let $title = $('#ticket-title').val(),
                 $description = $('#ticket-description').val(),
-                $priority = $("#select-priority option:selected").data('priority');
-            self.ticketsModel.addTicket($title, $description, $priority);
+                $priority = $("#select-priority option:selected").data('priority'),
+                $category = $("#select-category option:selected").data('id');
+            self.ticketsModel.addTicket($title, $description, $priority, $category);
             $("#editТicket").modal('hide');
-        })
+            location.href = '#/tickets';
+        });
+
+        // checked state оn tickets  
+        $('.btn-filter').on('click', function() {
+            var $target = $(this).data('state');
+            if ($target !== 'all') {
+                $('.table tbody tr').css('display', 'none');
+                $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+            } else {
+                $('.table tbody tr').css('display', 'none').fadeIn('slow');
+            }
+        });
     }
 
     draggable() {
@@ -202,8 +215,9 @@ class TicketsController {
             });
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
     allTickets() {
-        debugger;
         let self = this,
             tickets;
 
@@ -213,14 +227,21 @@ class TicketsController {
         lodaTemplate.getTemplate()
             .then((template) => {
                 tickets = this.ticketsModel.getTickets();
-                console.log(tickets);
+                console.log(tickets)
                 return template;
             })
             .then(template => {
                 setTimeout(function() {
                     self.container.html(template(tickets));
+                    self.initEvents();
                 }, 500);
             });
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    addComment() {
+
     }
 }
 

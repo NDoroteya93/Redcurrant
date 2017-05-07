@@ -23,7 +23,7 @@
                                         <input type="radio" name="options" id="option3" autocomplete="off"> ToDo
                                     </label>
 
-                                        <label class="btn btn-default btn-filter" data-target="all">
+                                        <label class="btn btn-default btn-filter" data-state="all">
                                         <input type="radio" name="options" id="option4" autocomplete="off"> All
                                     </label>
                                     </div>
@@ -41,11 +41,12 @@
                                     <th class="col-text">Category</th>
                                     <th class="col-text">Author</th>
                                     <th class="col-text">Priority</th>
+                                    <th class="col-text">Assignee</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{#each done}}
-                                <tr data-status="{{taskState}}">
+                                <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
                                         <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
@@ -58,7 +59,7 @@
                                 {{/each}}
 
                                 {{#each progress}}
-                                <tr data-status="{{taskState}}">
+                                <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
                                         <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
@@ -71,7 +72,7 @@
                                 {{/each}}
 
                                 {{#each todo}}
-                                <tr data-status="{{taskState}}">
+                                <tr data-status="{{taskState}}" data-id="{{id}}">
                                     <td align="center">
                                         <a class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
                                         <a class="btn btn-danger btn-xs"  data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></a>
@@ -111,11 +112,11 @@
                             </div>
                             <div class="col col-xs-3">
                                 <div class="pull-right">
-                                    <button type="button" class="btn btn-primary">
+                                    <a href="#/tickets/add/2" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-plus"
                                           aria-hidden="true"></span>
-                                    Add row
-                                </button>
+                                    Add Ticket
+                                </a>
                                 </div>
                             </div>
                         </div>
@@ -135,8 +136,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control " type="text" placeholder="Mohsin">
+                        <label for="edit-state">State</label>
+                        <select class="form-control" id="edit-state">
+                            <option data-id="0">To Do</option>
+                            <option data-id="1">Progress</option>
+                            <option data-id="2">Done</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
 
                         <input class="form-control " type="text" placeholder="Irshad">

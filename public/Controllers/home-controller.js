@@ -52,7 +52,6 @@ class HomeController {
         let user;
         Oidc.Log.logger = console;
         manager.events.addUserLoaded(function(loadedUser) {
-            debugger;
             user = loadedUser;
             let data = JSON.stringify(loadedUser);
             localStorage.setItem(LOCAL_STORAGE_USERNAME_KEY, data);

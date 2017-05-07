@@ -90,10 +90,10 @@ class TicketsModel {
     }
 
     // add tickets 
-    addTicket(title, description, priority, parrent) {
+    addTicket(title, description, priority, categoryId, parrent) {
         debugger;
         const body = {
-            categoryId: 0,
+            categoryId: categoryId,
             title: title,
             priority: Number(priority),
             screenshotUrl: "",
