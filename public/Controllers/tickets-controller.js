@@ -38,7 +38,7 @@ class TicketsController {
         return this._categories;
     }
 
-    loadTemplate() {
+    ticketTemplate() {
         let self = this,
             tickets;
 
@@ -131,6 +131,43 @@ class TicketsController {
                 location.href = "#/tickets";
             });
         });
+
+        // send comment on enter
+        $("#tickets-details-container").keypress(function(e) {
+            let $comment = $("#createNewComment").val(),
+                $id = $("#tickets-details-container").attr('data-id');
+            if (e.which == 13) {
+                self.addComment($id, $comment);
+            }
+        });
+        // send comment on click
+        $("#sendComment").on('click', function() {
+            debugger;
+            let $comment = $("#createNewComment").val(),
+                $id = $("#tickets-details-container").attr('data-id');
+            self.addComment($id, $comment);
+
+        });
+
+        // show comments
+        $("#showComment").on('click', function() {
+            if ($('#container-comments').hasClass('hidden')) {
+                $('#container-comments').removeClass('hidden');
+            } else {
+                $('#container-comments').addClass('hidden');
+            }
+        });
+
+        //assignee user to task
+        $(".changeAssignee").on('click', function() {
+            let $this = $(this),
+                $useriId = $this.attr('data-id'),
+                $taskId = $("#tickets-details-container").attr('data-id'),
+                $user = $this.text().trim();
+            $(".tagAssignedUser").text('#' + $user);
+            $(".tagAssignedUser").attr('href', `#/user/${$user}`);
+            self.ticketsModel.assigneeUserToTask($taskId, $useriId);
+        })
 
     }
 
@@ -247,6 +284,7 @@ class TicketsController {
             .then(res => {
                 setTimeout(function() {
                     self.container.html(res(details));
+                    self.initEvents();
                 }, 1000)
             });
     }
@@ -314,6 +352,15 @@ class TicketsController {
     deteleTicket(ticketId) {
         this.ticketsModel.deleteTicket(ticketId);
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    addComment(ticketId, comment) {
+        this.ticketsModel.addComment(ticketId, comment);
+        location.href = '#/tickets/details/' + ticketId;
+        $("#container-comments").removeClass('hidden');
+    }
+
+
 }
 
 

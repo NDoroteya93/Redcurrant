@@ -21,10 +21,7 @@ router
 
 router
     .on({
-        // home 
-        '*': function() {
-            home.loadTemplate();
-        },
+
         '#/learn': function() {
             $('body').animate({
                 scrollTop: document.body.scrollHeight
@@ -33,18 +30,16 @@ router
 
         // tickets
         '#/tickets': function() {
-            tickets.loadTemplate();
+            tickets.ticketTemplate();
             tickets.initEvents();
         },
-        '#/tickets/edit': function(e) {
+        '#/tickets/details/:id': function(params) {
+            console.log(details);
+            tickets.loadDetailsTemplate(params.id);
 
         },
         '#/tickets/comments': function() {
-            if ($('#container-comments').hasClass('hidden')) {
-                $('#container-comments').removeClass('hidden');
-            } else {
-                $('#container-comments').addClass('hidden');
-            }
+
         },
         '#/tickets/all': function() {
             tickets.allTickets();
@@ -69,7 +64,14 @@ router
         },
         '#/user/:username': function() {
             users.getUser();
-        }
+        },
+        '#/users/profile': function() {
+            users.viewUserProfile();
+        },
+        // home 
+        '*': function() {
+            home.loadTemplate();
+        },
 
     })
     .resolve();

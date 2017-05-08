@@ -1,4 +1,3 @@
-
 'use strict';
 
 import { UserModel } from 'userModel';
@@ -24,8 +23,8 @@ class UserController {
 
     loadTemplate(templateName) {
         // load template
-        const getTemplate = new loadTemplate(templateName);
         let self = this;
+        const getTemplate = new loadTemplate(templateName);
         getTemplate.getTemplate()
             .then(template => {
                 self.container.html(template());
@@ -90,13 +89,14 @@ class UserController {
     };
 
     getUser() {
+        debugger;
         let self = this,
             variableNames = [],
             uri = self._container[0].baseURI,
             route = '/user/:username',
             user;
 
-        route = route.replace(/([:*])(\w+)/g, function (full, dots, name) {
+        route = route.replace(/([:*])(\w+)/g, function(full, dots, name) {
             variableNames.push(name);
             return '([^\/]+)';
         }) + '(?:\/|$)';
@@ -114,6 +114,10 @@ class UserController {
                 }, 1000)
             });
     };
+
+    viewUserProfile() {
+        this.loadTemplate('admin');
+    }
 }
 
 

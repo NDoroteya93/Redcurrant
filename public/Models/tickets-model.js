@@ -119,12 +119,23 @@ class TicketsModel {
     }
 
     deleteTicket(id) {
-        debugger;
         const body = {
             ticketId: id
         }
         return requester.post(`https://130.204.27.87:44313/api/DeleteTicket?ticketId=${id}`, body)
             .then(function(resp) {
+                return resp;
+            });
+    }
+
+    addComment(ticketId, commment) {
+        const body = {
+            ticketId: ticketId,
+            content: commment
+        }
+        return requester.post(`https://130.204.27.87:44313/api/AddCommentToTicket`, body)
+            .then(function(resp) {
+                console.log(res);
                 return resp;
             });
     }

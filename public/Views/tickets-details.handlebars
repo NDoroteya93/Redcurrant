@@ -1,4 +1,4 @@
-<div id="tickets-details-container">
+<div id="tickets-details-container" data-id={{details.id}}>
     <div style="padding-top:50px;"> </div>
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -15,25 +15,28 @@
                          
                         <div class="dropdown pull-right">
                             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Users
+                                Assignee User to task
                                 <span class="caret"></span>
                     </button>
                     <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {{#each users.user}}
-                        <li><a href="#/users"><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{fullName}}</a></li>
+                        <li><a class="changeAssignee" data-id={{id}}><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{userName}}</a></li>
                         {{/each}}
                     </ul>
                 </div>
                 </span>
                 <br><br>
-                <i class="fa fa-tags" aria-hidden="true"></i> <a href="#/tags/priority" class="tag">#{{details.priority}}</a>                <a href="#/tags/assigne" class="tag">#{{assignee}}</a> <a href="#/tags/state" class="tag">#{{state}}</a>
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                    <a href="#/tickets/all" class="tag">#{{details.priority}}</a>   
+                    <a href="#/user/{{assignee}}" class="tag tagAssignedUser">#{{assignee}}</a>
+                    <a href="#/tickets/all" class="tag">#{{state}}</a>
                 <br><br>
                 <hr>
                 <span class="pull-left">
                         Created <strong>{{diffDate}}</strong> ago by <strong>{{details.author}}</strong>
                     </span>
                 <span class="pull-right">
-                      <a href="#/tickets/comments" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-comments-o" aria-hidden="true"></i> Comments <span class="badge">{{comments}}</span></a>
+                      <a id="showComment" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-comments-o" aria-hidden="true"></i> Comments <span class="badge">{{comments}}</span></a>
                 </span>
             </div>
         </div>
@@ -92,8 +95,8 @@
     <div class="media">
         <div class="pull-left">
             <a href="#">
-                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                            </a>
+                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+            </a>
         </div>
         <div class="media-body">
             <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
@@ -107,12 +110,17 @@
     <div class="media">
         <div class="pull-left">
             <a href="#">
-                        <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                    </a>
+                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+            </a>
         </div>
         <div class="media-body">
             <textarea id="createNewComment" class="form-control" rows="1" placeholder="Comment"></textarea>
+            <div class="pull-right">
+                <a id="sendComment" class="btn btn-default" data-title="Comment" data-toggle="modal" data-placement="top" data-toggle="tooltip"
+                    title="Send"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+            </div>
         </div>
+
     </div>
 </div>
 </div>
