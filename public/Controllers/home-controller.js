@@ -108,7 +108,14 @@ class HomeController {
             let $string = $('#searchString').val().trim(); 
             self.ticketsController.searchTicketByTitle($string);
             location.href = `#/FindTiketsByTitle/${$string}`;
-        })
+        });
+        $('#searchString').on('keypress', function(e) {
+            if (e.which == 13) {
+                let $string = $('#searchString').val().trim(); 
+                self.ticketsController.searchTicketByTitle($string);
+                location.href = `#/FindTiketsByTitle/${$string}`;
+            }
+        });
 
         return this;
     }
