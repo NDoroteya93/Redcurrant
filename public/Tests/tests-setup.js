@@ -23,7 +23,7 @@ const response = {
 };
 
 describe('Test Requester and models', function () {
-  //  this.timeout(15000);
+    //  this.timeout(15000);
 
     let jsonRequesterPostStub;
     let jsonRequesterGetStub;
@@ -94,7 +94,19 @@ describe('Test Requester and models', function () {
                 .then(done, done);
         });
 
-        it('expect User model getUsers to call get and return list of users', (done) => {
+        it('expect User model getUsers to call get ', (done) => {
+
+            jsonRequesterGetStub.returns(Promise.resolve([]));
+
+            var result = userModel.getUsers();
+            expect(jsonRequesterGetStub).to.have.been.calledOnce;
+            done();
+
+
+
+        });
+
+        it('expect User model getUsers to return list of users ', (done) => {
 
             const responseUsers =
                 [{
@@ -105,23 +117,55 @@ describe('Test Requester and models', function () {
                     authKey: 'SOME_AUTH_KEY'
                 }];
 
+            jsonRequesterGetStub.returns(Promise.resolve(responseUsers));
+
+            var result = userModel.getUsers();
 
 
-            jsonRequesterGetStub.returns(  new Promise(function ( resolve){
-                //resolve();
-               // Promise.resolve( resolve(responseUsers).done());
-                //.done();
+            expect(result.user.length).to.equal(0);
+            setTimeout(() => {
+                expect(result.user.length).to.equal(2);
+            }, 1000)
 
-                 //Promise.resolve(responseUsers);
-            }));
+            done();
 
-            // userModel.getUsers().then(()=>{
-            //     expect(jsonRequesterGetStub).to.have.been.calledOnce;
-            // });
-            var result = userModel.getUsers();//.resolve();
-            // expect(jsonRequesterGetStub).to.have.been.calledOnce;
-            
 
+
+        });
+
+         it('expect User model getUser to call get ', (done) => {
+
+            jsonRequesterGetStub.returns(Promise.resolve([]));
+
+            var result = userModel.getUser();
+            expect(jsonRequesterGetStub).to.have.been.calledOnce;
+
+            done();
+
+        });
+
+          it('expect User model getUser to return user ', (done) => {
+
+            const responseUsers =
+                [{
+                    username: "test",
+                    authKey: 'SOME_AUTH_KEY'
+                }, {
+                    username: "test2",
+                    authKey: 'SOME_AUTH_KEY'
+                }];
+
+            jsonRequesterGetStub.returns(Promise.resolve(responseUsers));
+
+            var result = userModel.getUser();
+
+
+            expect(result.data.length).to.equal(0);
+            setTimeout(() => {
+                expect(result.data.length).to.equal(2);
+            }, 1000)
+
+            done();
 
 
 
