@@ -17,8 +17,6 @@ router
     .on(home.initHome())
     .resolve();
 
-
-
 router
     .on({
 
@@ -56,15 +54,16 @@ router
             users.register();
         },
 
+
+        '#/admin': function() {
+            users.viewUserProfile();
+        },
         /// users
-        '#/users': function() {
+        '#/admin/users': function() {
             users.allUsers();
         },
         '#/user/:username': function() {
             users.getUser();
-        },
-        '#/admin': function() {
-            users.viewUserProfile();
         },
         // home 
         '*': function() {

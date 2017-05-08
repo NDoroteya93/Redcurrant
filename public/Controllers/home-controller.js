@@ -30,6 +30,17 @@ class HomeController {
     }
 
     initHome() {
+
+        // check on refrsh page 
+        if (localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) !== null) {
+
+            let userData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY));
+            $(".signed-user").removeClass('hidden');
+            $(".unsigned-user").addClass('hidden');
+            $('.user-name').text(userData.profile.preferred_username);
+            $('.user-email').text(userData.profile.email);
+        }
+
         let self = this;
         // load template
         let settings = {
@@ -85,16 +96,6 @@ class HomeController {
             localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
             self.userController.logout(manager);
         });
-
-        // check on refrsh page 
-        if (localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY) !== null) {
-
-            let userData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USERNAME_KEY));
-            $(".signed-user").removeClass('hidden');
-            $(".unsigned-user").addClass('hidden');
-            $('.user-name').text(userData.profile.preferred_username);
-            $('.user-email').text(userData.profile.email);
-        }
         return this;
     }
 
