@@ -53,18 +53,9 @@ class TicketsModel {
                 // get difference between current and created date
                 let date2 = new Date();
                 let date1 = new Date(res.createDate);
-                let diff = new Date(date2.getTime() - date1.getTime());
-                // diff is: Thu Jul 05 1973 04:00:00 GMT+0300 (EEST)
+                let diff = moment(date2).preciseDiff(date1);
 
-                // date 
-                if ((diff.getUTCFullYear() - 1970) > 0) {
-                    details.diffDate = (diff.getUTCFullYear() - 1970) + ' years';
-                } else if (diff.getUTCMonth() > 0) {
-                    details.diffDate = diff.getUTCMonth() + ' months'
-                } else {
-                    details.diffDate = diff.getUTCDate() - 1 + ' days'
-                }
-
+                details.diffDate = diff;
                 // state 
                 if (res.taskState === 0) {
                     details.state = 'ToDo';
@@ -83,6 +74,13 @@ class TicketsModel {
                 }
 
                 details.details = res;
+
+                // comment creater defference
+                details.details.comments.forEach((comment) => {
+                    comment.dateDiff = moment(date2).preciseDiff(comment.createdOn);
+
+                });
+
                 details.comments = res.comments.length;
             });
 

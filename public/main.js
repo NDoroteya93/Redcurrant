@@ -17,8 +17,6 @@ router
     .on(home.initHome())
     .resolve();
 
-
-
 router
     .on({
 
