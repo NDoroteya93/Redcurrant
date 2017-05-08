@@ -388,7 +388,7 @@
             
             #home-container .jumbotron {
                 background-image: url('../images/home-template.jpg');
-                background-position-y: -410px;
+                background-position: center;
                 background-size: cover;
                 background-repeat: no-repeat
             }
