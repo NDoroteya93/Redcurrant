@@ -145,7 +145,7 @@ class UserController {
 
         setTimeout(function() {
             self.createChart(taskStates);
-        }, 500)
+        }, 1000)
 
         this.filter();
         // Events

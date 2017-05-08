@@ -15,22 +15,49 @@
                          
                         <div class="dropdown pull-right">
                             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Assignee User to task
+                                {{assignee}}
                                 <span class="caret"></span>
-                            </button>
-                            <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                {{#each users.user}}
-                                <li><a class="changeAssignee" data-id={{id}}><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{userName}}</a></li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                    </span>
+                    </button>
+                    <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {{#each users.user}}
+                        <li><a class="changeAssignee" data-id={{id}}><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{userName}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                </span>
                 <br><br>
                 <i class="fa fa-tags" aria-hidden="true"></i>
-                    <a href="#/admin" class="tag">#{{details.priority}}</a>   
-                    <a href="#/user/{{assignee}}" class="tag tagAssignedUser">#{{assignee}}</a>
-                    <a href="#/admin" class="tag">#{{state}}</a>
+                <a href="#/admin" class="tag">#{{details.priority}}</a>
+                <a href="#/user/{{assignee}}" class="tag tagAssignedUser">#{{assignee}}</a>
+                <a href="#/admin" class="tag tagStateUser">#{{state}}</a>
                 <br><br>
+
+                <div class="row">
+                    <div class="col col-xs-6 text-left">
+                        {{details.description}}
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="row">
+                    <div class="col col-xs-6 text-left">
+                        <div class="pull-left">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success btn-state" data-state="2">
+                            <input type="radio" name="options" id="state1" autocomplete="off">
+                            Done
+                        </label>
+                                <label class="btn btn-danger btn-state" data-state="1">
+                            <input type="radio" name="options" id="state2" autocomplete="off"> In Progress
+                        </label>
+
+                                <label class="btn btn-warning btn-state" data-state="0">
+                            <input type="radio" name="options" id="state2" autocomplete="off"> ToDo
+                        </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr>
                 <span class="pull-left">
                         Created <strong>{{diffDate}}</strong> ago by <strong>{{details.author}}</strong>

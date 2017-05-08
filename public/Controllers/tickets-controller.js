@@ -90,7 +90,7 @@ class TicketsController {
 
         // checked state оn tickets  
         $('.btn-filter').on('click', function() {
-            var $target = $(this).data('state');
+            let $target = $(this).data('state');
             if ($target !== 'all') {
                 $('.table tbody tr').css('display', 'none');
                 $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
@@ -170,8 +170,19 @@ class TicketsController {
                 $user = $this.text().trim();
             $(".tagAssignedUser").text('#' + $user);
             $(".tagAssignedUser").attr('href', `#/user/${$user}`);
+            $("#dropdownMenu1").text($user);
             self.ticketsModel.assigneeUserToTask($taskId, $useriId);
-        })
+        });
+
+        // change state 
+        $(".btn-state").on('click', function() {
+            debugger;
+            let $target = $(this).data('state'),
+                $state = $(this).text().trim(),
+                $taskId = $("#tickets-details-container").attr('data-id');
+            self.updateState($taskId, $target);
+            $('.tagStateUser').text('#' + $state);
+        });
 
     }
 
@@ -368,8 +379,8 @@ class TicketsController {
         return Promise.resolve(currentUser);
     }
 
-    loadComments(id) {
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    deleteComment() {;
     }
 
 
