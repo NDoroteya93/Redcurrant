@@ -46,6 +46,10 @@ router
             tickets.addTicket(id);
         },
 
+        '#/FindTiketsByTitle/:title': function() {
+            tickets.searchTicketByTitle();
+        },
+
         /// register
         '#/register': function() {
             users.loadTemplate('user-register');

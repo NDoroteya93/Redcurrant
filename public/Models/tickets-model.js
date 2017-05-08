@@ -138,6 +138,17 @@ class TicketsModel {
             });
     }
 
+    searchTickets(string) {
+        let self = this,
+            results = { ticket: [] };
+        requester.get(`https://130.204.27.87:44313/api/FindTiketsByTitle/${string}`)
+            .then((res) => {
+                res.forEach((result) => {
+                    results.ticket.push(result);
+                });
+            });
+        return results;
+    }
 }
 
 export { TicketsModel }

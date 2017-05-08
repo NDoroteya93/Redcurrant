@@ -355,8 +355,36 @@ class TicketsController {
         $("#container-comments").removeClass('hidden');
     }
 
+    /// Search
+    searchTicketByTitle(string) {
+        let self = this,
+            tickets;
+        
+        if(!string) {
+            let variableNames = [],
+                uri = self._container[0].baseURI,
+                route = '/FindTiketsByTitle/:string';
+            route = route.replace(/([:*])(\w+)/g, function(full, dots, name) {
+                variableNames.push(name);
+                return '([^\/]+)';
+            }) + '(?:\/|$)';
 
+            string = uri.match(new RegExp(route))[1];
+        }
+        this.helpers.priorityHelper();
+
+        let template = new loadTemplate('tickets-results');
+        template.getTemplate()
+            .then((res) => {
+                tickets = this.ticketsModel.searchTickets(string);
+                return res;
+            })
+            .then((res) => {
+                setTimeout(function() {
+                    self.container.html(res(tickets));
+                }, 1000);
+            });
+    }
 }
-
 
 export { TicketsController };

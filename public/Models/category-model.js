@@ -11,7 +11,6 @@ class CategoryModel {
     }
 
     getCategories() {
-        debugger;
         let categories = [];
         requester.get('https://130.204.27.87:44313/api/GetCategories')
             .then((res) => {
