@@ -11,7 +11,8 @@
                 <li class="active"><a href="#dashboard" class="tabClick" data-toggle="tab"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li><a href="#configuration" class="tabClick" data-toggle="tab"><i class="fa fa-cogs"></i> <span>Configuration</span></a></li>
                 <li><a id="showMe" href="#users" class="tabClick" data-toggle="tab"><i class="fa fa-users"></i> <span>Users</span></a></li>
-                <li><a href="#mail" class="tabClick" data-toggle="tab"><i class="fa fa-envelope"></i> <span>Mail</span></a></li>
+                <li><a href="#alltickets" class="tabClick" data-toggle="tab"><i class="fa fa-tags"></i> <span>Tickets</span></a></li>
+                <li><a href="#mail" class="tabClick" data-toggle="tab"><i class="fa fa-envelope"></i> <span>Comments</span></a></li>
             </ul>
         </aside>
 
@@ -20,77 +21,59 @@
             <section class="tab-content">
 
                 <section class="tab-pane active fade in content" id="dashboard">
-
                     <div class="row">
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="panel panel-primary">
-                                <div class="panel-body">
-                                    <br/><br/><br/><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="panel panel-success">
-                                <div class="panel-body">
-                                    <br/><br/><br/><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="panel panel-danger">
-                                <div class="panel-body">
-                                    <br/><br/><br/><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="panel panel-warning">
-                                <div class="panel-body">
-                                    <br/><br/><br/><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-9">
+                        <div class="col-xs-8 col-sm-4 col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Something
+                                    Developer Workflow
                                 </div>
                                 <div class="panel-body">
-                                    This layout uses tabs to demonstrate what you could do with it. It probably makes more sense to use individual pages/templates
-                                    in a production app.
-                                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                    <canvas id="pieChart" width="400" height="400"></canvas>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-xs-12 col-sm-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Something
-                                </div>
-                                <div class="panel-body">
-                                    The sidebar is naturally responsive according to screen width. You can toggle it using the menu button in the topbar. Test
-                                    it out by increasing/decreasing your screen width and watch it respond.
-                                </div>
-                            </div>
+                        {{!--table taks--}}
 
+                        <div class="col-xs-12 col-sm-6 col-md-6 table-user-tickets">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Kaitani Labs
+                                    <h3 class="panel-title">{{data.1.assignee}}</h3>
+                                    <div class="pull-right">
+                                        <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+                                    </div>
                                 </div>
                                 <div class="panel-body">
-                                    Designed by <a href="http://www.kaitanilabs.com" target="_blank">Kaitani Labs</a></a>
+                                    <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers"
+                                    />
                                 </div>
+                                <table class="table table-hover" id="dev-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Author</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each data}}
+                                        <tr>
+                                            <td>{{@index}}</td>
+                                            <td>{{title}}</td>
+                                            <td>{{category}}</td>
+                                            <td>{{author}}</td>
+                                            <td>{{description}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
-                    </div>
-
                 </section>
 
                 <section class="tab-pane fade" id="configuration">
@@ -193,13 +176,22 @@
 
                 </section>
 
+                {{!--users--}}
+
                 <section class="tab-pane fade" id="users">
 
                 </section>
 
+                {{!--commentsc--}}
                 <section class="tab-pane fade" id="mail">
 
                 </section>
+
+                {{!--tickets--}}
+                <section class="tab-pane fade" id="alltickets">
+
+                </section>
+
 
             </section>
 </div>

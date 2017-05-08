@@ -67,6 +67,12 @@ class TicketsController {
             self.loadDetailsTemplate($id);
         });
 
+        $('.view-comments').on('click', function() {
+            let $this = $(this),
+                $parent = $this.parents('.drag-container'),
+                $id = $parent.data('id');
+            self.loadDetailsTemplate($id);
+        });
 
         // dragable tickets
         this.draggable();
@@ -84,7 +90,7 @@ class TicketsController {
 
         // checked state оn tickets  
         $('.btn-filter').on('click', function() {
-            var $target = $(this).data('state');
+            let $target = $(this).data('state');
             if ($target !== 'all') {
                 $('.table tbody tr').css('display', 'none');
                 $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
@@ -121,7 +127,7 @@ class TicketsController {
             let $this = $(this);
             let $id = $this.attr('data-id');
             self.deteleTicket($id);
-            location.href = "#/tickets/all";
+            self.allTickets();
             $("#delete").modal('hide');
         });
         // lation on close modal popup
@@ -164,9 +170,66 @@ class TicketsController {
                 $user = $this.text().trim();
             $(".tagAssignedUser").text('#' + $user);
             $(".tagAssignedUser").attr('href', `#/user/${$user}`);
+            $("#dropdownMenu1").text($user);
             self.ticketsModel.assigneeUserToTask($taskId, $useriId);
-        })
+        });
 
+        // change state 
+        $(".btn-state").on('click', function() {
+            let $target = $(this).data('state'),
+                $state = $(this).text().trim(),
+                $taskId = $("#tickets-details-container").attr('data-id');
+            self.updateState($taskId, $target);
+            $('.tagStateUser').text('#' + $state);
+        });
+
+        // delete comment btn
+        $(".delete-comment-btn").on('click', function() {
+            let $id = $(this).parents('.panel-body').attr('data-comment');
+            self.deleteComment($id);
+            $(this).parents('.panel-body').remove();
+        });
+
+        // hide comment
+        $('.hideComment').on('click', function() {
+            $(this).parents('.panel-body').addClass('hidden');
+        });
+
+        // share on facebook 
+        let ENV, FB_ID, BASE_URL;
+        if (document.domain === 'ticketsystem.com') {
+            ENV = 'local';
+            FB_ID = 'XXXXXX';
+            BASE_URL = 'http://ticketsystem.com';
+        } else if (document.domain === 'mytest.ticketsystem.com') {
+            ENV = 'staging';
+            FB_ID = 'XXXXXX';
+            BASE_URL = 'http://mytest.ticketsystem.com';
+        } else {
+            ENV = 'production';
+            FB_ID = 'XXXXXXX';
+            BASE_URL = 'http://www.example.com';
+        }
+
+        let galleryItem = 'home-template.jpg'
+        $(".shareFbBtn").on('click', function(e) {
+            e.preventDefault();
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': BASE_URL,
+                        'og:title': galleryItem.title,
+                        'og:description': galleryItem.description,
+                        'og:og:image:width': '2560',
+                        'og:image:height': '960',
+                        'og:image': BASE_URL + '/Contents/images/' + galleryItem
+                    }
+                })
+            });
+
+        });
     }
 
     draggable() {
@@ -276,6 +339,7 @@ class TicketsController {
             .then((res) => {
                 details = this.ticketsModel.getTicketsDetails(id);
                 details.users = allUsers;
+                console.log(details);
                 return res;
             })
             .then(res => {
@@ -319,7 +383,7 @@ class TicketsController {
             })
             .then(template => {
                 setTimeout(function() {
-                    self.container.html(template(tickets));
+                    $("#alltickets").html(template(tickets));
                     self.initEvents();
                 }, 500);
             });
@@ -355,6 +419,17 @@ class TicketsController {
         $("#container-comments").removeClass('hidden');
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    getTicketForCurrentUser() {
+        let currentUser = this.ticketsModel.getTicketForCurrentUser();
+        return Promise.resolve(currentUser);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    deleteComment(id) {
+        this.ticketsModel.deleteComment(id);
+    }
+
     /// Search
     searchTicketByTitle(string) {
         let self = this,
@@ -371,6 +446,7 @@ class TicketsController {
 
             string = uri.match(new RegExp(route))[1];
         }
+        
         this.helpers.priorityHelper();
 
         let template = new loadTemplate('tickets-results');

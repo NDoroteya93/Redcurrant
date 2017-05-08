@@ -3,7 +3,8 @@
 import { requester } from 'requester';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
-    LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
+    LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key',
+    API = 'https://130.204.27.87:44313/api';
 
 class TicketsModel {
     constructor() {
@@ -17,7 +18,7 @@ class TicketsModel {
     getTickets() {
         let self = this,
             states = { todo: [], progress: [], done: [] };
-        requester.get('https://130.204.27.87:44313/api/GetTickets')
+        requester.get(API + '/GetTickets')
             .then((res) => {
                 res.forEach((ticket) => {
                     if (ticket.taskState === 0) {
@@ -38,7 +39,7 @@ class TicketsModel {
 
     // state state - todo, in progress, done
     changeState(id, state, body) {
-        return requester.post(`https://130.204.27.87:44313/api/ChangeState?Id=${id}&TaskState=${state}`, body)
+        return requester.post(API + `/ChangeState?Id=${id}&TaskState=${state}`, body)
             .then(function(resp) {
                 return resp;
             });
@@ -48,7 +49,7 @@ class TicketsModel {
     getTicketsDetails(id) {
         const self = this;
         let details = {};
-        requester.get(`https://130.204.27.87:44313/api/GetTicketDetails?id=${id}`)
+        requester.get(API + `/GetTicketDetails?id=${id}`)
             .then((res) => {
                 // get difference between current and created date
                 let date2 = new Date();
@@ -100,7 +101,7 @@ class TicketsModel {
 
         let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
         let header = { "Authorization": "Bearer " + token }
-        return requester.post('https://130.204.27.87:44313/api/CreateTicket', body, header);
+        return requester.post(API + '/CreateTicket', body, header);
     }
 
     assigneeUserToTask(taskId, userId) {
@@ -108,7 +109,7 @@ class TicketsModel {
             id: taskId,
             userId: userId
         }
-        return requester.post(`https://130.204.27.87:44313/api/AssigneeUserToTask?Id=${taskId}&UserId=${userId}`, body)
+        return requester.post(API + `/AssigneeUserToTask?Id=${taskId}&UserId=${userId}`, body)
             .then(function(resp) {
                 return resp;
             });
@@ -118,7 +119,7 @@ class TicketsModel {
         const body = {
             ticketId: id
         }
-        return requester.post(`https://130.204.27.87:44313/api/DeleteTicket?ticketId=${id}`, body)
+        return requester.post(API + `/DeleteTicket?ticketId=${id}`, body)
             .then(function(resp) {
                 return resp;
             });
@@ -132,8 +133,29 @@ class TicketsModel {
 
         let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
         let header = { "Authorization": "Bearer " + token }
-        return requester.post(`https://130.204.27.87:44313/api/AddCommentToTicket`, body, header)
+        return requester.post(API + '/AddCommentToTicket', body, header)
             .then(function(res) {
+                return res;
+            });
+    }
+
+    getTicketForCurrentUser() {
+        let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+        let header = { "Authorization": "Bearer " + token }
+        return requester.get(API + '/GetTicketsForCurrentUser', header)
+            .then(function(res) {
+                console.log(res);
+                return res;
+            });
+    }
+
+    deleteComment(id) {
+        const body = {
+            commentId: id
+        }
+        return requester.post(API + `/DeleteComment?commentId=${id}`, body)
+            .then(function(res) {
+                console.log(res);
                 return res;
             });
     }

@@ -1,7 +1,7 @@
             /*hidden elements*/
             
             .hidden {
-                display: none;
+                display: none !important;
             }
             
             .toast {
@@ -388,7 +388,7 @@
             
             #home-container .jumbotron {
                 background-image: url('../images/home-template.jpg');
-                background-position-y: -410px;
+                background-position: center;
                 background-size: cover;
                 background-repeat: no-repeat
             }
@@ -666,4 +666,27 @@
                     margin-left: 15px;
                     margin-right: 15px;
                 }
+            }
+            /*table of tasks in admin panel*/
+            
+            #admin-template .table-user-tickets .row {
+                margin-top: 40px;
+                padding: 0 10px;
+            }
+            
+            #admin-template .table-user-tickets .clickable {
+                cursor: pointer;
+            }
+            
+            #admin-template .table-user-tickets .panel-heading div {
+                margin-top: -18px;
+                font-size: 15px;
+            }
+            
+            #admin-template .table-user-tickets .panel-heading div span {
+                margin-left: 5px;
+            }
+            
+            #admin-template .table-user-tickets .panel-body {
+                display: none;
             }

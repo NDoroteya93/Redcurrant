@@ -2,6 +2,7 @@
 
 import { UserModel } from 'userModel';
 import { loadTemplate } from 'templates';
+import { TicketsController } from 'ticketsController';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
     LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
@@ -11,6 +12,7 @@ class UserController {
     constructor() {
         this._userModel = new UserModel;
         this._container = $('#container');
+        this._tickets = new TicketsController;
     }
 
     get userModel() {
@@ -21,13 +23,16 @@ class UserController {
         return this._container;
     }
 
-    loadTemplate(templateName) {
+    get tickets() { return this._tickets; }
+
+    loadTemplate(templateName, data) {
+        data = data || '';
         // load template
         let self = this;
         const getTemplate = new loadTemplate(templateName);
         getTemplate.getTemplate()
             .then(template => {
-                self.container.html(template());
+                self.container.html(template(data));
             });
     }
 
@@ -73,7 +78,7 @@ class UserController {
     allUsers() {
         let self = this,
             users;
-            
+
         let template = new loadTemplate('users');
         template.getTemplate()
             .then((res) => {
@@ -114,17 +119,123 @@ class UserController {
     };
 
     viewUserProfile() {
-        this.loadTemplate('admin');
+        let self = this;
+        let dataTickets = [],
+            taskStates = [],
+            todo = 0,
+            done = 0,
+            progress = 0;
 
+        // get data for current user
+        this.tickets.getTicketForCurrentUser()
+            .then((res) => {
+                res.forEach((ticket) => {
+                    if (ticket.taskState === 0) {
+                        todo++;
+                    } else if (ticket.taskState === 1) {
+                        progress++;
+                    } else if (ticket.taskState === 2) {
+                        done++;
+                    }
+                    dataTickets.push(ticket);
+                });
+                taskStates.push(todo, progress, done);
+                self.loadTemplate('admin', { data: dataTickets });
+            });
+
+        setTimeout(function() {
+            self.createChart(taskStates);
+        }, 1000)
+
+        this.filter();
+        // Events
         $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
             let href = e.target.href.split('#')[1];
-            location.href = '#/admin/' + href;
+            if (href !== 'dashboard') {
+                location.href = '#/admin/' + href;
+            }
         });
 
         $(document).on("click", ".sidebar-toggle", function() {
             $(".wrapper").toggleClass("toggled");
         });
 
+    }
+
+    createChart(dataState) {
+        // data for chart
+        let data = {
+            labels: [
+                "ToDo",
+                "In Progress",
+                "Done"
+            ],
+            datasets: [{
+                data: dataState,
+                backgroundColor: [
+                    "#ec971f",
+                    "#ff0000",
+                    "#4cae4c"
+                ],
+                hoverBackgroundColor: [
+                    "#ce8621",
+                    "#d80202",
+                    "#53b353"
+                ]
+            }]
+        };
+
+        // Pie Chart
+        let ctx = ctx = $("#pieChart")[0].getContext('2d');
+        let pieChart = new Chart(
+            ctx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            });
+    }
+
+    filter() {
+        // attach table filter plugin to inputs
+        $(document).on('keyup', '[data-action="filter"]', function(e) {
+            $('.filterTable_no_results').remove();
+            var $this = $(this),
+                search = $this.val().toLowerCase(),
+                target = $this.attr('data-filters'),
+                $target = $(target),
+                $rows = $target.find('tbody tr');
+
+            if (search == '') {
+                $rows.show();
+            } else {
+                $rows.each(function() {
+                    var $this = $(this);
+                    $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                })
+                if ($target.find('tbody tr:visible').length === 0) {
+                    var col_count = $target.find('tr').first().find('td').size();
+                    var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                    $target.find('tbody').append(no_results);
+                }
+            }
+        });
+
+
+        $(document).on('click', '.table-user-tickets span.filter', function(e) {
+            var $this = $(this),
+                $panel = $this.parents('.panel');
+
+            $panel.find('.panel-body').slideToggle();
+            if ($this.css('display') != 'none') {
+                $panel.find('.panel-body input').focus();
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+        // attach table filter plugin to inputs
     }
 }
 

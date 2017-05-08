@@ -38,9 +38,7 @@ router
         '#/tickets/comments': function() {
 
         },
-        '#/tickets/all': function() {
-            tickets.allTickets();
-        },
+
         '#/tickets/add/:action': function(params) {
             let id = params.id;
             tickets.addTicket(id);
@@ -65,6 +63,9 @@ router
         /// users
         '#/admin/users': function() {
             users.allUsers();
+        },
+        '#/admin/alltickets': function() {
+            tickets.allTickets();
         },
         '#/user/:username': function() {
             users.getUser();
