@@ -176,12 +176,19 @@ class TicketsController {
 
         // change state 
         $(".btn-state").on('click', function() {
-            debugger;
             let $target = $(this).data('state'),
                 $state = $(this).text().trim(),
                 $taskId = $("#tickets-details-container").attr('data-id');
             self.updateState($taskId, $target);
             $('.tagStateUser').text('#' + $state);
+        });
+
+        // delete comment btn
+        $(".delete-comment-btn").on('click', function() {
+            debugger;
+            let $id = $(this).parents('.panel-body').attr('data-comment');
+            self.deleteComment($id);
+            $(this).parents('.panel-body').remove();
         });
 
     }
@@ -380,7 +387,8 @@ class TicketsController {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    deleteComment() {;
+    deleteComment(id) {
+        this.ticketsModel.deleteComment(id);
     }
 
 

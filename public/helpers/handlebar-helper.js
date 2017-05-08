@@ -14,18 +14,6 @@ class Helpers {
             }
         });
     }
-
-    taskState() {
-        Handlebars.registerHelper('checked', function(num) {
-            if (num === 0) {
-                return new Handlebars.SafeString('checked');
-            } else if (num === 1) {
-                return new Handlebars.SafeString('checked');
-            } else if (num === 2) {
-                return new Handlebars.SafeString('checked');
-            }
-        });
-    }
 }
 
 export { Helpers };
