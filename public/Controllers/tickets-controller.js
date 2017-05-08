@@ -118,7 +118,6 @@ class TicketsController {
 
         // edit ticket to update ticket
         $("#delete-ticket-btn").on('click', function() {
-            debugger;
             let $this = $(this);
             let $id = $this.attr('data-id');
             self.deteleTicket($id);
@@ -142,7 +141,6 @@ class TicketsController {
         });
         // send comment on click
         $("#sendComment").on('click', function() {
-            debugger;
             let $comment = $("#createNewComment").val(),
                 $id = $("#tickets-details-container").attr('data-id');
             self.addComment($id, $comment);
@@ -278,7 +276,6 @@ class TicketsController {
             .then((res) => {
                 details = this.ticketsModel.getTicketsDetails(id);
                 details.users = allUsers;
-                console.log(details);
                 return res;
             })
             .then(res => {
@@ -294,7 +291,6 @@ class TicketsController {
         let addTemplate = new loadTemplate('tickets-add'),
             self = this,
             categories = this.categories.getCategories();
-        console.log(categories);
         addTemplate.getTemplate()
             .then((template) => {
                 $('<div id="popupAdd"></div>').appendTo(self.container);
@@ -319,7 +315,6 @@ class TicketsController {
             .then((template) => {
                 tickets = this.ticketsModel.getTickets();
                 tickets.users = allUsers;
-                console.log(tickets);
                 return template;
             })
             .then(template => {

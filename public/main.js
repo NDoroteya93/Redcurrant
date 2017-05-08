@@ -46,7 +46,6 @@ router
         '#/tickets/add/:action': function(params) {
             let id = params.id;
             tickets.addTicket(id);
-            console.log(params);
         },
 
         /// register

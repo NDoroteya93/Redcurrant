@@ -37,7 +37,6 @@ class UserModel {
     }
 
     register(email, username, firstname, lastname, password, confirmPass, roleName) {
-        debugger;
         const body = {
             email: email,
             username: username,
