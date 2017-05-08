@@ -116,8 +116,13 @@ class UserController {
     };
 
     viewUserProfile() {
+        let self = this;
         this.loadTemplate('admin');
+        setTimeout(function() {
+            self.createChart();
+        }, 500)
 
+        // Events
         $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
             let href = e.target.href.split('#')[1];
             location.href = '#/admin/' + href;
@@ -126,7 +131,41 @@ class UserController {
         $(document).on("click", ".sidebar-toggle", function() {
             $(".wrapper").toggleClass("toggled");
         });
+    }
 
+    createChart() {
+        let ctx = ctx = $("#pieChart")[0].getContext('2d');;
+        let data = {
+            labels: [
+                "ToDo",
+                "In Progress",
+                "Done"
+            ],
+            datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                    "#ec971f",
+                    "#ff0000",
+                    "#4cae4c"
+                ],
+                hoverBackgroundColor: [
+                    "#ce8621",
+                    "#d80202",
+                    "#53b353"
+                ]
+            }]
+        };
+        // Pie Chart
+        let pieChart = new Chart(
+            ctx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            });
     }
 }
 

@@ -122,7 +122,7 @@ class TicketsController {
             let $this = $(this);
             let $id = $this.attr('data-id');
             self.deteleTicket($id);
-            location.href = "#/tickets/all";
+            self.allTickets();
             $("#delete").modal('hide');
         });
         // lation on close modal popup
@@ -324,7 +324,7 @@ class TicketsController {
             })
             .then(template => {
                 setTimeout(function() {
-                    self.container.html(template(tickets));
+                    $("#alltickets").html(template(tickets));
                     self.initEvents();
                 }, 500);
             });
