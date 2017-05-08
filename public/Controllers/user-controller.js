@@ -110,7 +110,7 @@ class UserController {
             })
             .then((res) => {
                 setTimeout(function() {
-                    self.container.html(res(user));
+                    $("#users").html(res(user));
                 }, 1000)
             });
     };
@@ -118,9 +118,9 @@ class UserController {
     viewUserProfile() {
         this.loadTemplate('admin');
 
-        $('#showMe').on('click', function(e) {
-            alert('Here')
-            let target = this.href.split('/');
+        $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
+            let href = e.target.href.split('#')[1];
+            location.href = '#/admin/' + href;
         });
 
         $(document).on("click", ".sidebar-toggle", function() {
