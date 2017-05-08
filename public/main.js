@@ -34,7 +34,6 @@ router
             tickets.initEvents();
         },
         '#/tickets/details/:id': function(params) {
-            console.log(details);
             tickets.loadDetailsTemplate(params.id);
 
         },
@@ -65,7 +64,7 @@ router
         '#/user/:username': function() {
             users.getUser();
         },
-        '#/users/profile': function() {
+        '#/admin': function() {
             users.viewUserProfile();
         },
         // home 

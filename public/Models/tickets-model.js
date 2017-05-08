@@ -133,10 +133,13 @@ class TicketsModel {
             ticketId: ticketId,
             content: commment
         }
-        return requester.post(`https://130.204.27.87:44313/api/AddCommentToTicket`, body)
-            .then(function(resp) {
+
+        let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+        let header = { "Authorization": "Bearer " + token }
+        return requester.post(`https://130.204.27.87:44313/api/AddCommentToTicket`, body, header)
+            .then(function(res) {
                 console.log(res);
-                return resp;
+                return res;
             });
     }
 

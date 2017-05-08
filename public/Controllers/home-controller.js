@@ -85,7 +85,6 @@ class HomeController {
             localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
             self.userController.logout(manager);
         });
-
         return this;
     }
 
