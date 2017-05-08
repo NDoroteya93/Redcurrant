@@ -446,7 +446,7 @@ class TicketsController {
 
             string = uri.match(new RegExp(route))[1];
         }
-        
+
         this.helpers.priorityHelper();
 
         let template = new loadTemplate('tickets-results');

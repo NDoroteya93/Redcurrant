@@ -144,7 +144,6 @@ class TicketsModel {
         let header = { "Authorization": "Bearer " + token }
         return requester.get(API + '/GetTicketsForCurrentUser', header)
             .then(function(res) {
-                console.log(res);
                 return res;
             });
     }
@@ -155,7 +154,6 @@ class TicketsModel {
         }
         return requester.post(API + `/DeleteComment?commentId=${id}`, body)
             .then(function(res) {
-                console.log(res);
                 return res;
             });
     }
@@ -163,7 +161,7 @@ class TicketsModel {
     searchTickets(string) {
         let self = this,
             results = { ticket: [] };
-        requester.get(`https://130.204.27.87:44313/api/FindTiketsByTitle/${string}`)
+        requester.get(API + `/FindTiketsByTitle/${string}`)
             .then((res) => {
                 res.forEach((result) => {
                     results.ticket.push(result);

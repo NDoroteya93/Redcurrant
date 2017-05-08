@@ -44,8 +44,9 @@ router
             tickets.addTicket(id);
         },
 
-        '#/FindTiketsByTitle/:title': function() {
-            tickets.searchTicketByTitle();
+        '#/FindTiketsByTitle/:title': function(params) {
+            let title = params.title;
+            tickets.searchTicketByTitle(title);
         },
 
         /// register
