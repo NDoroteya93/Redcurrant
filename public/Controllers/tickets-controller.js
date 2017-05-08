@@ -185,12 +185,51 @@ class TicketsController {
 
         // delete comment btn
         $(".delete-comment-btn").on('click', function() {
-            debugger;
             let $id = $(this).parents('.panel-body').attr('data-comment');
             self.deleteComment($id);
             $(this).parents('.panel-body').remove();
         });
 
+        // hide comment
+        $('.hideComment').on('click', function() {
+            $(this).parents('.panel-body').addClass('hidden');
+        });
+
+        // share on facebook 
+        let ENV, FB_ID, BASE_URL;
+        if (document.domain === 'ticketsystem.com') {
+            ENV = 'local';
+            FB_ID = 'XXXXXX';
+            BASE_URL = 'http://ticketsystem.com';
+        } else if (document.domain === 'mytest.ticketsystem.com') {
+            ENV = 'staging';
+            FB_ID = 'XXXXXX';
+            BASE_URL = 'http://mytest.ticketsystem.com';
+        } else {
+            ENV = 'production';
+            FB_ID = 'XXXXXXX';
+            BASE_URL = 'http://www.example.com';
+        }
+
+        let galleryItem = 'home-template.jpg'
+        $(".shareFbBtn").on('click', function(e) {
+            e.preventDefault();
+            FB.ui({
+                method: 'share_open_graph',
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': BASE_URL,
+                        'og:title': galleryItem.title,
+                        'og:description': galleryItem.description,
+                        'og:og:image:width': '2560',
+                        'og:image:height': '960',
+                        'og:image': BASE_URL + '/Contents/images/' + galleryItem
+                    }
+                })
+            });
+
+        });
     }
 
     draggable() {
