@@ -67,6 +67,12 @@ class TicketsController {
             self.loadDetailsTemplate($id);
         });
 
+        $('.view-comments').on('click', function() {
+            let $this = $(this),
+                $parent = $this.parents('.drag-container'),
+                $id = $parent.data('id');
+            self.loadDetailsTemplate($id);
+        });
 
         // dragable tickets
         this.draggable();
@@ -276,6 +282,7 @@ class TicketsController {
             .then((res) => {
                 details = this.ticketsModel.getTicketsDetails(id);
                 details.users = allUsers;
+                console.log(details);
                 return res;
             })
             .then(res => {
@@ -353,6 +360,16 @@ class TicketsController {
         this.ticketsModel.addComment(ticketId, comment);
         location.href = '#/tickets/details/' + ticketId;
         $("#container-comments").removeClass('hidden');
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    getTicketForCurrentUser() {
+        let currentUser = this.ticketsModel.getTicketForCurrentUser();
+        return Promise.resolve(currentUser);
+    }
+
+    loadComments(id) {
+
     }
 
 

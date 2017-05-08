@@ -2,6 +2,7 @@
 
 import { UserModel } from 'userModel';
 import { loadTemplate } from 'templates';
+import { TicketsController } from 'ticketsController';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
     LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
@@ -11,6 +12,7 @@ class UserController {
     constructor() {
         this._userModel = new UserModel;
         this._container = $('#container');
+        this._tickets = new TicketsController;
     }
 
     get userModel() {
@@ -20,6 +22,8 @@ class UserController {
     get container() {
         return this._container;
     }
+
+    get tickets() { return this._tickets; }
 
     loadTemplate(templateName) {
         // load template
@@ -73,7 +77,7 @@ class UserController {
     allUsers() {
         let self = this,
             users;
-            
+
         let template = new loadTemplate('users');
         template.getTemplate()
             .then((res) => {
@@ -123,7 +127,9 @@ class UserController {
         // Events
         $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function(e) {
             let href = e.target.href.split('#')[1];
-            location.href = '#/admin/' + href;
+            if (href !== 'dashboard') {
+                location.href = '#/admin/' + href;
+            }
         });
 
         $(document).on("click", ".sidebar-toggle", function() {
@@ -132,7 +138,13 @@ class UserController {
     }
 
     createChart() {
-        let ctx = ctx = $("#pieChart")[0].getContext('2d');;
+        let dataTickets,
+            taskStates = [],
+            todo = 0,
+            done = 0,
+            progress = 0;
+
+        // data for chart
         let data = {
             labels: [
                 "ToDo",
@@ -140,7 +152,7 @@ class UserController {
                 "Done"
             ],
             datasets: [{
-                data: [300, 50, 100],
+                data: taskStates,
                 backgroundColor: [
                     "#ec971f",
                     "#ff0000",
@@ -153,17 +165,38 @@ class UserController {
                 ]
             }]
         };
-        // Pie Chart
-        let pieChart = new Chart(
-            ctx, {
-                type: 'pie',
-                data: data,
-                options: {
-                    animation: {
-                        animateScale: true
+        this.tickets.getTicketForCurrentUser()
+            .then((res) => {
+                res.forEach((ticket) => {
+                    debugger;
+                    if (ticket.taskState === 0) {
+                        todo++;
+                    } else if (ticket.taskState === 1) {
+                        progress++;
+                    } else if (ticket.taskState === 2) {
+                        done++;
                     }
-                }
+                });
+                taskStates.push(todo, progress, done);
+                // Pie Chart
+                let ctx = ctx = $("#pieChart")[0].getContext('2d');
+                let pieChart = new Chart(
+                    ctx, {
+                        type: 'pie',
+                        data: data,
+                        options: {
+                            animation: {
+                                animateScale: true
+                            }
+                        }
+                    });
             });
+
+        console.log(taskStates);
+
+
+
+
     }
 }
 

@@ -667,3 +667,26 @@
                     margin-right: 15px;
                 }
             }
+            /*table of tasks in admin panel*/
+            
+            #admin-template .table-user-tickets .row {
+                margin-top: 40px;
+                padding: 0 10px;
+            }
+            
+            #admin-template .table-user-tickets .clickable {
+                cursor: pointer;
+            }
+            
+            #admin-template .table-user-tickets .panel-heading div {
+                margin-top: -18px;
+                font-size: 15px;
+            }
+            
+            #admin-template .table-user-tickets .panel-heading div span {
+                margin-left: 5px;
+            }
+            
+            #admin-template .table-user-tickets .panel-body {
+                display: none;
+            }

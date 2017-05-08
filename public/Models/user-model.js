@@ -19,7 +19,7 @@ class UserModel {
                 res.forEach((obj) => {
                     users.user.push(obj);
                 });
-        });
+            });
         return users;
     }
 
@@ -48,13 +48,7 @@ class UserModel {
         }
         return requester.post('https://130.204.27.87:44313/api/accounts/CreateUser', body);
     }
-    login() {
 
-    }
-
-    logout() {
-
-    }
 }
 
 

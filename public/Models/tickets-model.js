@@ -138,6 +138,16 @@ class TicketsModel {
             });
     }
 
+    getTicketForCurrentUser() {
+        let token = localStorage.getItem(LOCAL_STORAGE_AUTHKEY_KEY);
+        let header = { "Authorization": "Bearer " + token }
+        return requester.get('https://130.204.27.87:44313/api/GetTicketsForCurrentUser', header)
+            .then(function(res) {
+                console.log(res);
+                return res;
+            });
+    }
+
 }
 
 export { TicketsModel }
