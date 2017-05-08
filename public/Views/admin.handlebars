@@ -39,7 +39,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6 table-user-tickets">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Doroteya Nikolova</h3>
+                                    <h3 class="panel-title">{{data.1.assignee}}</h3>
                                     <div class="pull-right">
                                         <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
 								<i class="glyphicon glyphicon-filter"></i>
@@ -61,27 +61,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each data}}
                                         <tr>
-                                            <td>1</td>
-                                            <td>Kilgore</td>
-                                            <td>Trout</td>
-                                            <td>kilgore</td>
-                                            <td></td>
+                                            <td>{{@index}}</td>
+                                            <td>{{title}}</td>
+                                            <td>{{category}}</td>
+                                            <td>{{author}}</td>
+                                            <td>{{description}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Bob</td>
-                                            <td>Loblaw</td>
-                                            <td>boblahblah</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Holden</td>
-                                            <td>Caulfield</td>
-                                            <td>penceyreject</td>
-                                            <td></td>
-                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>

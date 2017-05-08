@@ -25,13 +25,14 @@ class UserController {
 
     get tickets() { return this._tickets; }
 
-    loadTemplate(templateName) {
+    loadTemplate(templateName, data) {
+        data = data || '';
         // load template
         let self = this;
         const getTemplate = new loadTemplate(templateName);
         getTemplate.getTemplate()
             .then(template => {
-                self.container.html(template());
+                self.container.html(template(data));
             });
     }
 
@@ -119,9 +120,31 @@ class UserController {
 
     viewUserProfile() {
         let self = this;
-        this.loadTemplate('admin');
+        let dataTickets = [],
+            taskStates = [],
+            todo = 0,
+            done = 0,
+            progress = 0;
+
+        // get data for current user
+        this.tickets.getTicketForCurrentUser()
+            .then((res) => {
+                res.forEach((ticket) => {
+                    if (ticket.taskState === 0) {
+                        todo++;
+                    } else if (ticket.taskState === 1) {
+                        progress++;
+                    } else if (ticket.taskState === 2) {
+                        done++;
+                    }
+                    dataTickets.push(ticket);
+                });
+                taskStates.push(todo, progress, done);
+                self.loadTemplate('admin', { data: dataTickets });
+            });
+
         setTimeout(function() {
-            self.createChart();
+            self.createChart(taskStates);
         }, 500)
 
         // Events
@@ -137,13 +160,7 @@ class UserController {
         });
     }
 
-    createChart() {
-        let dataTickets,
-            taskStates = [],
-            todo = 0,
-            done = 0,
-            progress = 0;
-
+    createChart(dataState) {
         // data for chart
         let data = {
             labels: [
@@ -152,7 +169,7 @@ class UserController {
                 "Done"
             ],
             datasets: [{
-                data: taskStates,
+                data: dataState,
                 backgroundColor: [
                     "#ec971f",
                     "#ff0000",
@@ -165,37 +182,19 @@ class UserController {
                 ]
             }]
         };
-        this.tickets.getTicketForCurrentUser()
-            .then((res) => {
-                res.forEach((ticket) => {
-                    debugger;
-                    if (ticket.taskState === 0) {
-                        todo++;
-                    } else if (ticket.taskState === 1) {
-                        progress++;
-                    } else if (ticket.taskState === 2) {
-                        done++;
+
+        // Pie Chart
+        let ctx = ctx = $("#pieChart")[0].getContext('2d');
+        let pieChart = new Chart(
+            ctx, {
+                type: 'pie',
+                data: data,
+                options: {
+                    animation: {
+                        animateScale: true
                     }
-                });
-                taskStates.push(todo, progress, done);
-                // Pie Chart
-                let ctx = ctx = $("#pieChart")[0].getContext('2d');
-                let pieChart = new Chart(
-                    ctx, {
-                        type: 'pie',
-                        data: data,
-                        options: {
-                            animation: {
-                                animateScale: true
-                            }
-                        }
-                    });
+                }
             });
-
-        console.log(taskStates);
-
-
-
 
     }
 }
