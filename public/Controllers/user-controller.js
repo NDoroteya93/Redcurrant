@@ -66,7 +66,6 @@ class UserController {
                     location.href = '#/tickets';
                 },
                 (errorMsg) => {
-                    console.log(errorMsg);
                     location.href = '#/register';
                 });
     };
@@ -74,7 +73,7 @@ class UserController {
     allUsers() {
         let self = this,
             users;
-
+            
         let template = new loadTemplate('users');
         template.getTemplate()
             .then((res) => {
@@ -89,7 +88,6 @@ class UserController {
     };
 
     getUser() {
-        debugger;
         let self = this,
             variableNames = [],
             uri = self._container[0].baseURI,

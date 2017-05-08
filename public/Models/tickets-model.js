@@ -104,14 +104,12 @@ class TicketsModel {
     }
 
     assigneeUserToTask(taskId, userId) {
-        debugger;
         const body = {
             id: taskId,
             userId: userId
         }
         return requester.post(`https://130.204.27.87:44313/api/AssigneeUserToTask?Id=${taskId}&UserId=${userId}`, body)
             .then(function(resp) {
-                console.log(resp);
                 return resp;
             });
     }
@@ -136,7 +134,6 @@ class TicketsModel {
         let header = { "Authorization": "Bearer " + token }
         return requester.post(`https://130.204.27.87:44313/api/AddCommentToTicket`, body, header)
             .then(function(res) {
-                console.log(res);
                 return res;
             });
     }

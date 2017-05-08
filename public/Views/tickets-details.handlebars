@@ -17,14 +17,14 @@
                             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Assignee User to task
                                 <span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        {{#each users.user}}
-                        <li><a class="changeAssignee" data-id={{id}}><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{userName}}</a></li>
-                        {{/each}}
-                    </ul>
-                </div>
-                </span>
+                            </button>
+                            <ul id="dropdown-users" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                {{#each users.user}}
+                                <li><a class="changeAssignee" data-id={{id}}><i class="fa fa-fw fa-user" aria-hidden="true"></i> {{userName}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </span>
                 <br><br>
                 <i class="fa fa-tags" aria-hidden="true"></i>
                     <a href="#/admin" class="tag">#{{details.priority}}</a>   
