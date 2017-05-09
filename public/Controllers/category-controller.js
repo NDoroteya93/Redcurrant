@@ -4,10 +4,31 @@ import { CategoryModel } from 'categoryModel';
 
 class CategoryController {
     constructor() {
+        this._categoryModel = new CategoryModel;
+    }
 
+    get categoryModel() {
+        return this._categoryModel;
     }
 
     getCategory() {}
 
-    addCategory() {}
+    addCategory() {
+        let self = this;
+        // get data from input fields
+        const title = $('#title').val()
+
+        self.categoryModel.addCategory(title)
+            .then((resp) => {
+                    toastr.success(`Categoy created successfully`);
+                    location.href = '#/category';
+                },
+                (errorMsg) => {
+                    location.href = '#/category';
+                });
+    }
+
+    deleteCategory(categoryId) {
+        this._categoryModel.deleteCategory(categoryId);
+    }
 }

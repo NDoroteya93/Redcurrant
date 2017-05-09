@@ -336,6 +336,7 @@ class TicketsController {
                 setTimeout(function() {
                     self.container.html(res(details));
                     self.initEvents();
+                    $(".btn-state[data-state=" + details.details.taskState + "]").addClass('active').prop('checked', true);
                 }, 1000)
             });
     }
@@ -347,9 +348,11 @@ class TicketsController {
             categories = this.categories.getCategories();
         addTemplate.getTemplate()
             .then((template) => {
-                $('<div id="popupAdd"></div>').appendTo(self.container);
-                $('#popupAdd').html(template(categories));
-                $("#editТicket").modal('show');
+                setTimeout(function() {
+                    $('<div id="popupAdd"></div>').appendTo(self.container);
+                    $('#popupAdd').html(template(categories));
+                    $("#editТicket").modal('show');
+                }, 500)
                 self.initEvents();
             });
     }
