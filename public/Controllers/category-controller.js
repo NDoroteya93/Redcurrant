@@ -22,15 +22,15 @@ class CategoryController {
         self.categoryModel.addCategory(title)
             .then((resp) => {
                     toastr.success(`Categoy created successfully`);
-                    location.href = '#/category';
+                    location.href = '#/admin/categories';
                 },
                 (errorMsg) => {
-                    location.href = '#/category';
+                    location.href = '#/admin/categories';
                 });
     }
 
     deleteCategory(categoryId) {
-        this._categoryModel.deleteCategory(categoryId);
+        this.categoryModel.deleteCategory(categoryId);
     }
 }
 

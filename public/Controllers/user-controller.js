@@ -277,16 +277,34 @@ class UserController {
             .then(template => {
                 setTimeout(function() {
                     $("#categories").html(template({ data: categories }));
-                    $('#add-category-btn').on('click', function() {
-                        self.addCategory();
-                        $("#addCategory").modal('hide');
-                    });
+                    self.categoryEvents();
                 }, 500);
             });
     }
+    categoryEvents() {
+        let self = this;
 
-    addCategory() {
-        this.categoryController.addCategory();
+        $('#add-category-btn').on('click', function() {
+            self.categoryController.addCategory();
+            $("#addCategory").modal('hide');
+        });
+
+
+        // delete btn to open idalog
+        $(".delete-category-btn").on('click', function() {
+            let $this = $(this);
+            let $id = $this.parents('tr').data('id');
+            $("#delete-category-btn").attr("data-id", $id);
+            $("#deleteCategory").modal('show');
+        });
+
+        // edit ticket to update ticket
+        $("#delete-category-btn").on('click', function() {
+            let $this = $(this);
+            let $id = $this.attr('data-id');
+            self.categoryController.deleteCategory($id);
+            $("#deleteCategory").modal('hide');
+        });
     }
 }
 

@@ -77,10 +77,6 @@ router
         '#/admin/categories': function() {
             users.getCategories();
         },
-
-        '#/category/add': function() {
-            $('#addCategory').modal('show');
-        },
         // home 
         '*': function() {
             home.loadTemplate();
