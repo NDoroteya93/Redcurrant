@@ -71,6 +71,9 @@ router
         '#/user/:username': function() {
             users.getUser();
         },
+        '#/admin/configuration': function() {
+            users.changePass();
+        },
         // home 
         '*': function() {
             home.loadTemplate();

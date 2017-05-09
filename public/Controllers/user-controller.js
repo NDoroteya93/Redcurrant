@@ -3,6 +3,7 @@
 import { UserModel } from 'userModel';
 import { loadTemplate } from 'templates';
 import { TicketsController } from 'ticketsController';
+import { Helpers } from 'helpers';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
     LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
@@ -13,6 +14,7 @@ class UserController {
         this._userModel = new UserModel;
         this._container = $('#container');
         this._tickets = new TicketsController;
+        this._helpers = new Helpers;
     }
 
     get userModel() {
@@ -24,6 +26,10 @@ class UserController {
     }
 
     get tickets() { return this._tickets; }
+
+    get helpers() {
+        return this._helpers;
+    }
 
     loadTemplate(templateName, data) {
         data = data || '';
@@ -119,6 +125,7 @@ class UserController {
     };
 
     viewUserProfile() {
+        this.helpers.loadCanvas();
         let self = this;
         let dataTickets = [],
             taskStates = [],
@@ -143,11 +150,11 @@ class UserController {
                 return dataTickets;
             }).then((dataTickets) => {
                 self.loadTemplate('admin', { data: dataTickets });
-            });
-
-        setTimeout(function() {
-            self.createChart(taskStates);
-        }, 1000)
+            }).then(() => {
+                setTimeout(function() {
+                    self.createChart(taskStates);
+                }, 1500)
+            })
 
         this.filter();
         // Events
@@ -186,9 +193,8 @@ class UserController {
                 ]
             }]
         };
-
         // Pie Chart
-        let ctx = ctx = $("#pieChart")[0].getContext('2d');
+        let ctx = $("#pieChart")[0].getContext('2d');
         let pieChart = new Chart(
             ctx, {
                 type: 'pie',
@@ -199,9 +205,11 @@ class UserController {
                     }
                 }
             });
+
     }
 
     filter() {
+        $(".table-user-ticket span.filter").unbind();
         // attach table filter plugin to inputs
         $(document).on('keyup', '[data-action="filter"]', function(e) {
             $('.filterTable_no_results').remove();
@@ -238,6 +246,15 @@ class UserController {
         });
         $('[data-toggle="tooltip"]').tooltip();
         // attach table filter plugin to inputs
+    }
+
+    // change password 
+    changePass() {
+        const getTemplate = new loadTemplate('changepass');
+        getTemplate.getTemplate()
+            .then(template => {
+                $("#configuration").html(template());
+            });
     }
 }
 

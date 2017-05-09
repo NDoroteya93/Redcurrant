@@ -14,6 +14,15 @@ class Helpers {
             }
         });
     }
+
+    loadCanvas() {
+        Handlebars.registerHelper("dataUrl", function() {
+            let canvas = document.getElementById("pieChart");
+            canvas.classList.remove('hidden');
+            return canvas.toDataURL();
+        });
+    }
 }
+
 
 export { Helpers };
