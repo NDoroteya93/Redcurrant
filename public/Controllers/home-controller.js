@@ -2,6 +2,7 @@
 import { loadTemplate } from 'templates';
 import { HomeModel } from 'homeModel';
 import { UserController } from 'userController';
+import { TicketsController } from 'ticketsController';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
     LOCAL_STORAGE_AUTHKEY_KEY = 'signed-in-user-auth-key';
@@ -10,6 +11,7 @@ class HomeController {
     constructor() {
         this._container = $('#container');
         this._userController = new UserController;
+        this._ticketsController = new TicketsController;
     }
 
     get container() {
@@ -18,6 +20,10 @@ class HomeController {
 
     get userController() {
         return this._userController;
+    }
+
+    get ticketsController() {
+        return this._ticketsController;
     }
 
     loadTemplate() {
@@ -96,6 +102,21 @@ class HomeController {
             localStorage.removeItem(LOCAL_STORAGE_AUTHKEY_KEY);
             self.userController.logout(manager);
         });
+
+        // search
+        $('#searchByTitle').on('click', function() {
+            let $string = $('#searchString').val().trim(); 
+            self.ticketsController.searchTicketByTitle($string);
+            location.href = `#/FindTiketsByTitle/${$string}`;
+        });
+        $('#searchString').on('keypress', function(e) {
+            if (e.which == 13) {
+                let $string = $('#searchString').val().trim(); 
+                self.ticketsController.searchTicketByTitle($string);
+                location.href = `#/FindTiketsByTitle/${$string}`;
+            }
+        });
+
         return this;
     }
 

@@ -44,6 +44,11 @@ router
             tickets.addTicket(id);
         },
 
+        '#/FindTiketsByTitle/:title': function(params) {
+            let title = params.title;
+            tickets.searchTicketByTitle(title);
+        },
+
         /// register
         '#/register': function() {
             users.loadTemplate('user-register');
