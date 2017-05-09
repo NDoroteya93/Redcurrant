@@ -195,7 +195,7 @@ class TicketsController {
             $(this).parents('.panel-body').addClass('hidden');
         });
 
-        // share on facebook 
+        // share on facebook  FIX IT!!
         let ENV, FB_ID, BASE_URL;
         if (document.domain === 'ticketsystem.com') {
             ENV = 'local';
@@ -331,6 +331,7 @@ class TicketsController {
 
     // get tickets details
     loadDetailsTemplate(id) {
+        debugger;
         let self = this,
             details;
         const allUsers = self.users.getUsers();

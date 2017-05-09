@@ -140,6 +140,8 @@ class UserController {
                     dataTickets.push(ticket);
                 });
                 taskStates.push(todo, progress, done);
+                return dataTickets;
+            }).then((dataTickets) => {
                 self.loadTemplate('admin', { data: dataTickets });
             });
 
