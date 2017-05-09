@@ -3,6 +3,7 @@
 import { requester } from 'requester';
 import { UserModel } from 'userModel';
 import { TicketsModel } from 'ticketsModel';
+import { CategoryModel } from 'categoryModel';
 
 mocha.setup('bdd');
 
@@ -11,6 +12,8 @@ let assert = chai.assert;
 
 let userModel = new UserModel;
 let ticketsModel = new TicketsModel;
+let categoryModel = new CategoryModel;
+
 //let sinon = require('sinon');
 let spyFunction = sinon.spy();
 
@@ -393,6 +396,40 @@ describe('Test Requester and models', function () {
 
     });
 
+    describe('Test category model', function () {
+        it('expect Category model getCategories to call get request', (done) => {
+
+
+            jsonRequesterGetStub.returns(Promise.resolve([]));
+
+            var result = categoryModel.getCategories();
+            expect(jsonRequesterGetStub).to.have.been.calledOnce;
+
+            done();
+        });
+        //it('expect Category model getCategories to return list of categories ', (done) => {
+
+           // const responseCat =
+                []
+                    
+                    ;
+
+           // jsonRequesterGetStub.returns(Promise.resolve(responseCat));
+
+            //var result = categoryModel.getCategories();
+
+
+           // expect(result.categories.length).to.equal(0);
+            //setTimeout(() => {
+            //    expect(result.categories.length).to.equal(1);
+           // }, 1000)
+
+           // done();
+
+
+
+       // });
+    });
 });
 
 mocha.run();
