@@ -74,6 +74,13 @@ router
         '#/admin/configuration': function() {
             users.changePass();
         },
+        '#/admin/categories': function() {
+            users.getCategories();
+        },
+
+        '#/category/add': function() {
+            $('#addCategory').modal('show');
+        },
         // home 
         '*': function() {
             home.loadTemplate();

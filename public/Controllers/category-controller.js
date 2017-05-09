@@ -14,9 +14,10 @@ class CategoryController {
     getCategory() {}
 
     addCategory() {
+        debugger;
         let self = this;
         // get data from input fields
-        const title = $('#title').val()
+        const title = $('#category-name').val()
 
         self.categoryModel.addCategory(title)
             .then((resp) => {
@@ -32,3 +33,5 @@ class CategoryController {
         this._categoryModel.deleteCategory(categoryId);
     }
 }
+
+export { CategoryController };

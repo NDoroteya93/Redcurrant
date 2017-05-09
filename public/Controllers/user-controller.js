@@ -3,6 +3,8 @@
 import { UserModel } from 'userModel';
 import { loadTemplate } from 'templates';
 import { TicketsController } from 'ticketsController';
+import { CategoryModel } from 'categoryModel';
+import { CategoryController } from 'categoryController';
 import { Helpers } from 'helpers';
 
 const LOCAL_STORAGE_USERNAME_KEY = 'signed-in-user-username',
@@ -14,6 +16,8 @@ class UserController {
         this._userModel = new UserModel;
         this._container = $('#container');
         this._tickets = new TicketsController;
+        this._categories = new CategoryModel;
+        this._categoryController = new CategoryController;
         this._helpers = new Helpers;
     }
 
@@ -29,6 +33,14 @@ class UserController {
 
     get helpers() {
         return this._helpers;
+    }
+
+    get categories() {
+        return this._categories;
+    }
+
+    get categoryController() {
+        return this._categoryController;
     }
 
     loadTemplate(templateName, data) {
@@ -255,6 +267,26 @@ class UserController {
             .then(template => {
                 $("#configuration").html(template());
             });
+    }
+
+    getCategories() {
+        let self = this;
+        const getTemplate = new loadTemplate('categories');
+        let categories = this.categories.getCategories();
+        getTemplate.getTemplate()
+            .then(template => {
+                setTimeout(function() {
+                    $("#categories").html(template({ data: categories }));
+                    $('#add-category-btn').on('click', function() {
+                        self.addCategory();
+                        $("#addCategory").modal('hide');
+                    });
+                }, 500);
+            });
+    }
+
+    addCategory() {
+        this.categoryController.addCategory();
     }
 }
 

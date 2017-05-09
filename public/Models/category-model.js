@@ -26,7 +26,7 @@ class CategoryModel {
         const body = {
             name: title
         }
-        return requester.post(API + '/CreateCategoryr', body);
+        return requester.post(API + '/CreateCategory', body);
     }
 
     updateCategory(id, title) {
@@ -34,14 +34,14 @@ class CategoryModel {
             id: id,
             name: title
         }
-        return requester.post(API + '/UpdateCategoryr', body);
+        return requester.post(API + '/UpdateCategory', body);
     }
 
     deleteCategory(Id) {
         const body = {
             id: Id
         }
-        return requester.post(API + '/DeleteCategoryr', body);
+        return requester.post(API + '/DeleteCategory', body);
     }
 
 
