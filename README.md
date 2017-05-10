@@ -1,104 +1,67 @@
-# JavaScript Applications: Teamwork Assignment
+![Redcurrant](https://github.com/NDoroteya93/Redcurrant/blob/master/public/Contents/images/rctickets-logo.png)
+# TeamWorkProject
+## Telerik Academy - Javascript Application
 
-This document describes the teamwork assignment for Telerik Academy students in "JavaScript Applications" course
+### Introduction
 
-## Project Description
+This is a simple issue tracking system, which allows IT support to be organized, focused, efficient, and effective. A ticket system is designed to organize issues as they are reported and keeps track of all fixes made.
 
-Design and implement an **object-oriented web SPA application** by choice.
+### System Features
 
-It could be a simple game , component library , business application or any other
-- You are absolutely free to choose the topic of your work
-- Sample applications:
-  - Snake
-  - Chess
-  - Backgammon
-  - Minesweeper
-  - Tetris
-  - Xonix
-  - Supermario
-  - Components library(windows, buttons, text boxes, menus, etc.)
-  - Book store
-  - Auction
-  - Movie rental
-  - Bug tracker
-  - Knowledge management system
-  - E-library
-  - Text editor
+There are several features for better experience:
 
-## General Requirements
-Please define and implement the following assets in your project:
-- Use [jQuery](https://jquery.com/)
-- Implement OOP design
-  - Application logic using objects, modules and data hiding
-    - Use ES2015 classes and mixins
-    - Both Prototypal and classical inheritances are Ok
-  - At least 3 modules
-  - At least 7 types (classes) of objects
-- Unit tests
-  - Using [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [SinonJS](http://sinonjs.org/)
-- Implement a UI for your application
-  - Use KendoUI, jQueryUI or implement your own UI logic
-- Use some kind of web data storage, one of the following is Ok
-  - Your backend with Node.js, PHP, ASP.NET, Django, Ruby on Rails, Spring, etc...
-  - Telerik Backend Services
-  - Firebase
-  - Microsoft Mobile App Services
-- Use some kind of local storage, one of the following is Ok:
-  - `localStorage`
-  - `sessionStorage`
-- Use [Twitter Bootstrap](http://getbootstrap.com/)
-  - Research and use Bootstrap for your application
-  - Make the application responsive for different screens and resolutions
-- At least one third-party API to share something from your application
-  - Samples:
-    - Share status to Facebook, Google+, Twitter, etc...
-    - Upload images to Facebook, Flickr, Instagram
--   **The application must work in the latest versions of the browsers: Google Chrome, Mozilla Firefox, MS Edge, Internet Explorer 10/11, Opera and Apple Safari**
+- **Main Menu Screen**
+  - **TICKETS** - Dashboard with To Do, In progress and Done states
+  - **SIGN IN** - User registration and login form
+ 
+- **Registered user**
+  - **Аdd Tickets** - Any registered user can add Tickets, Category and Comments for any task.
+  - **Change State** - Any registered user can change state on task with drag-and-drop or check buttons
+  - **Manage Views** - Table of users, categories and all your tasks
+ 
+### Development Task List
+- Create Main Structure
+   - HTML file, link Contents
+  - main JS file structure - main.js
+  - Contents with css files and images
+- Create Models structures
+  - Category
+  - Home
+  - Tickets
+  - User
+- Create Controllers strucures
+  - Category
+  - Home
+  - Tickets
+  - User
+- Create Views strucures
+  - Admin panel
+  - Categories
+  - Change Password
+  - Home 
+  - Tickets Dashboard
+  - Add Ticket
+  - All Tickets Table
+  - Ticket Details 
+  - Result from search
+  - User Details
+  - Register form
+  - Users Tables
+- Create Helpers
+  - Facebook APP
+  - Handlebar helpers
+  - Requester
+  - Templates
+  - Router - not used
 
-##  Additional Requirements
-Follow the best practices for producing high-quality code:
--   **Correct naming**
--   **Data encapsulation**
-  -     Use OOP and modules
--   **Strong cohesion** and **loose coupling**
--   Use **GIT** as a source control system
--   Host it on [http://github.com](http://github.com)
--   Deploy your application on a cloud server of your choice - Heroku, Firebase, Amazon S3, Microsoft Azure
+**Here are some useful links:**  
+- [Project Description](https://github.com/NDoroteya93/Redcurrant#introduction)
+- [System Introduction Video]()
+- [Development Task List](https://github.com/NDoroteya93/Redcurrant#development-task-list)
 
-##  Optional Requirements
-If you have a chance, time and a suitable situation, you might add some of the following to your project:
--   Backward compatibility (make the application usable on browsers like IE8, IE7 and IE6)
--   Integration tests
--   Minify your application source - minified and concatanated javascript and css files
--   Use a module loader of your choice - SystemJS, RequireJS, etc, or roll up your own loader
--   Use semantic tags and semantic html
--   Usage of a structural JavaScript framework:
-  -     AngularJS, KendoUI, Knockout.js, Backbone.js, etc...
+## Teamwork members
 
-##  Non-required Work
--   Completely finished project is not obligatory required. It will not be a big problem if your project is not completely finished or is not working greatly
-  -     This team work project is for educational purpose
-  -     Its main purpose it to experience using graphics, DOM manipulation and OOP in a real-world-like project and to get some experience in team working and team collaboration with a source control system.
--   Implementation of server-side logic with ASP.NET, PHP, Java or Node.js
-
-##  Deliverables
-
-- **Record** a short video **showcasing your application**
-- **Register** your application at [Telerik Academy Showcase System](http://best.telerikacademy.com)
-  - Provide a link for the github repository of your application
-  - Provide a link to the video
-  - Host your application on a server, and provide a link
-    - You can host your application on http://appharbor.com, http://heroku.com or just use the http://rawgit.com
-
-##  Public Project Defense
-Each team will have to deliver a public defense of its work to the other students and trainers. You will have only 10 minutes for the following:
-- Demonstrate the application (very shortly)
-- Show the recorder video
-- Show the source code
-- Show the commits logs to confirm that team member have contributed.
-- Optionally you might prepare a presentation (3-4 slides)
-
-Please be **strict in timing!** Be well prepared for presenting maximum of your work for minimum time. Bring your own laptop. Test it preliminary with the multimedia projector. Open the project assets beforehand to save time. You have 10 minutes, no more
-
-##  Give Feedback about Your Teammates
-You will be invited to provide feedback about all your teammates, their attitude to this project, their technical skills, their team working skills, their contribution to the project, etc. The feedback is important part of the project evaluation so take it seriously and be honest
+#### Contributors
+[Доротея Николова](https://telerikacademy.com/Users/d.nikolova93) - d.nikolova93  
+[Емилия Павлова](http://telerikacademy.com/Users/Emily) - Emily  
+[Диляна Комитова](http://telerikacademy.com/Users/DilyanaKom) - DilyanaKom
