@@ -1,0 +1,1 @@
+describe("Task Gosho",function(){it("Test 1",function(){expect(2).to.equal(2)}),it("Test 2",function(){expect(3).to.equal(3)}),it("Equal test",function(){const a=[1,2,3];expect(a).to.equal(a)}),it("Eql test",function(){const a=[1,2,3],b=[1,2,3];expect(a).to.eql(b)}),describe("Assertions",function(){it("Assert test",function(){assert(!0,"2 is not 3")})})});
